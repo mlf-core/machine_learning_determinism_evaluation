@@ -5,7 +5,7 @@ process train {
 
     script:
     """
-    #!/opt/conda/bin/python
+    #!/home/user/miniconda/envs/py36/bin/python3
     
 from __future__ import print_function
 import argparse
