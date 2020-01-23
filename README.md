@@ -9,6 +9,8 @@ Training a simple 2d convolutional neural network (2d conv, 2d conv, dropout (0.
 * Cuda
 * Nvidia-container-toolkit
 * A Cuda enabled GPU
+* Nextflow
+* openjdk 8 < x < 12
 
 ## Run 
 
