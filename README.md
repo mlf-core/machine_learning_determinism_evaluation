@@ -12,6 +12,6 @@ Training a simple 2d convolutional neural network (2d conv, 2d conv, dropout (0.
 
 ## Run 
 
-nextflow run main.nf --GPU YES -with-docker
+nextflow run main.nf --GPU ON -with-docker
 
 Note, that the label possibly has to be set manually. There may be some nasty hidden bug (https://github.com/nextflow-io/nextflow/issues/1471)
