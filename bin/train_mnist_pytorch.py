@@ -6,6 +6,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+import numpy as np
+import random
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 
@@ -67,6 +69,16 @@ def test(args, model, device, test_loader):
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset), 100. * correct / len(test_loader.dataset)))
 
+def random_seed(seed_value, use_cuda):
+    np.random.seed(seed_value) # cpu vars
+    torch.manual_seed(seed_value) # cpu  vars
+    random.seed(seed_value) # Python
+    if use_cuda: 
+        torch.cuda.manual_seed(seed_value)
+        torch.cuda.manual_seed_all(seed_value) # gpu vars
+        torch.backends.cudnn.deterministic = True  #needed
+        torch.backends.cudnn.benchmark = False
+
 # Training settings
 parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
 parser.add_argument('--batch-size', type=int, default=64, metavar='N',
@@ -91,7 +103,7 @@ parser.add_argument('--save-model', action='store_true', default=False,
 args = parser.parse_args()
 use_cuda = not args.no_cuda and torch.cuda.is_available()
 
-torch.manual_seed(args.seed)
+random_seed(args.seed, True)
 
 device = torch.device("cuda" if use_cuda else "cpu")
 
