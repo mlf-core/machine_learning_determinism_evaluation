@@ -5,6 +5,6 @@ process train_mnist_pytorch {
 
     script:
     """
-    train_mnist_pytorch.py
+    train_mnist_pytorch.py --epochs ${params.epochs}
     """
 }

@@ -1,4 +1,4 @@
-#!/home/user/miniconda/envs/py36/bin/python3
+#!/home/user/miniconda/envs/pytorch-1.4-cuda-10.1/bin/python
     
 from __future__ import print_function
 import argparse
@@ -97,7 +97,6 @@ parser.add_argument('--seed', type=int, default=1, metavar='S',
                     help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                     help='how many batches to wait before logging training status')
-
 parser.add_argument('--save-model', action='store_true', default=False,
                     help='For Saving the current Model')
 args = parser.parse_args()
