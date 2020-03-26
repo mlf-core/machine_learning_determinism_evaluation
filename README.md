@@ -13,6 +13,12 @@ Training a simple 2d convolutional neural network (2d conv, 2d conv, dropout (0.
 * Nextflow
 * openjdk 8 < x < 12
 
+## Building the docker images locally
+
+```bash
+docker build -f Dockerfile_pytorch -t ml/pytorch:dev
+```
+
 ## Running
 
 Running with docker:

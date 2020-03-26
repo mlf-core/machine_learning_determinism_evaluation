@@ -1,0 +1,13 @@
+name: pytorch-1.4-cuda-10.1
+channels:
+    - conda-forge
+    - defaults
+    - pytorch
+    - menpo
+dependencies:
+    - defaults::cudatoolkit=10.1
+    - pytorch::pytorch=1.4.0=py3.7_cuda10.1.243_cudnn7.6.3_0
+    - pytorch::torchvision=0.5.0=py37_cu101
+    - conda-forge::graphviz=2.40.1
+    - conda-forge::python-graphviz=0.13.2
+

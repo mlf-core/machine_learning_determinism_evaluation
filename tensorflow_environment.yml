@@ -1,0 +1,10 @@
+name: tensorflow-2.1-cuda-10.1
+channels:
+    - conda-forge
+    - defaults
+dependencies:
+    - defaults::cudatoolkit=10.1
+    - defaults::tensorflow-gpu=2.1.0
+    - conda-forge::graphviz=2.40.1
+    - conda-forge::python-graphviz=0.13.2
+
