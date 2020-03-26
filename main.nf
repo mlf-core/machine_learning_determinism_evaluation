@@ -1,16 +1,16 @@
-/* process train_mnist_pytorch {
+process train_mnist_pytorch {
     echo true
     container 'ml/pytorch:dev'
 
     label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
 
+    when: params.pytorch
+
     script:
     """
     train_mnist_pytorch.py --epochs ${params.epochs}
     """
-
-    when: params.pytorch
-} */
+}
 
 process train_mnist_tensorflow {
     echo true
@@ -18,9 +18,10 @@ process train_mnist_tensorflow {
 
     label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
 
+    when: params.tensorflow
+
     script:
     """
     train_mnist_tensorflow.py
     """
-
 }
