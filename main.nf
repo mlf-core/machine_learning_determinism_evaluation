@@ -25,3 +25,17 @@ process train_mnist_tensorflow {
     train_mnist_tensorflow.py
     """
 }
+
+process train_boston_xgboost {
+    echo true
+    container 'ml/xgboost:dev'
+
+    label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
+
+    when: params.xgboost
+
+    script:
+    """
+    train_boston_xgboost.py
+    """
+}

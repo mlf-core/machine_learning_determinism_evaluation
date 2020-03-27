@@ -1,0 +1,10 @@
+name: xgboost-1.0.2-cuda-10.1
+channels:
+    - conda-forge
+    - defaults
+dependencies:
+    - defaults::cudatoolkit=10.1
+    - conda-forge::graphviz=2.40.1
+    - conda-forge::python-graphviz=0.13.2
+    - conda-forge::xgboost=1.0.2
+
