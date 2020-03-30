@@ -9,4 +9,4 @@ dependencies:
     - conda-forge::scikit-learn==0.22.1
     - pip
     - pip:
-      - xgboost
+      - xgboost==1.0.2
