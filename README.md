@@ -17,13 +17,15 @@ Training a simple 2d convolutional neural network (2d conv, 2d conv, dropout (0.
 
 ```bash
 docker build -f Dockerfile_pytorch -t ml/pytorch:dev
+docker build -f Dockerfile_tensorflow -t ml/tensorflow:dev
+docker build -f Dockerfile_xgboost -t ml/xgboost:dev
 ```
 
 ## Running
 
 Running with docker:
 ```bash
-nextflow run main.nf --GPU ON -with-docker
+nextflow run main.nf --GPU ON -with-docker -
 ```
 
 Alternative you can use singularity to train your model:
