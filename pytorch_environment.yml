@@ -3,8 +3,8 @@ channels:
     - conda-forge
     - defaults
     - pytorch
-    - menpo
 dependencies:
+    - defaults::click=7.1.1
     - defaults::cudatoolkit=10.1
     - pytorch::pytorch=1.4.0=py3.7_cuda10.1.243_cudnn7.6.3_0
     - pytorch::torchvision=0.5.0=py37_cu101

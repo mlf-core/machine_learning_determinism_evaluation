@@ -1,28 +1,46 @@
 #!/home/user/miniconda/envs/xgboost-1.0.2-cuda-10.1/bin/python
 import xgboost as xgb
-from sklearn.datasets import load_boston
+import numpy as np
+from sklearn.datasets import fetch_covtype
+from sklearn.model_selection import train_test_split
+import time
+import random
 
-boston = load_boston()
+# Fetch dataset using sklearn
+cov = fetch_covtype()
+X = cov.data
+y = cov.target
 
-params = {'silent': False, 'tree_method': 'gpu_hist',
-          'n_estimators': 100, 'subsample': 0.5}
+np.random.seed(0)
+random.seed(0) # Python general seed
 
-# sklearn API example
-gbm = xgb.XGBRegressor(**params)
-gbm.fit(boston.data, boston.target, eval_set=[(boston.data, boston.target)])
+# Create 0.75/0.25 train/test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
 
-#
-# Additional parameters for gpu_hist tree method
-# single_precision_histogram, [default=``false``]
-# Use single precision to build histograms. See document for GPU support for more details.
+# Leave most parameters as default
+param = {'objective': 'multi:softmax',
+         'num_class': 8,
+         'seed': 0,
+        # 'single_precision_histogram': True
+         }
 
-# deterministic_histogram, [default=``true``]
+# Convert input data from numpy to XGBoost format
+dtrain = xgb.DMatrix(X_train, label=y_train)
+dtest = xgb.DMatrix(X_test, label=y_test)
 
-# Build histogram on GPU deterministically. Histogram building is not deterministic due to the non-associative aspect of floating point summation.
-# We employ a pre-rounding routine to mitigate the issue, which may lead to slightly lower accuracy. Set to false to disable it.
+# Specify sufficient boosting iterations to reach a minimum
+num_round = 100
 
-# ________________________________________________________________________________________________________________________________________________________
-# Choice of algorithm to fit linear model
+# GPU Training
+param['tree_method'] = 'gpu_hist'
+gpu_res = {}
+tmp = time.time()
+xgb.train(param, dtrain, num_round, evals=[(dtest, 'test')], evals_result=gpu_res)
+print("GPU Training Time: %s seconds" % (str(time.time() - tmp)))
 
-# shotgun: Parallel coordinate descent algorithm based on shotgun algorithm. Uses ‘hogwild’ parallelism and therefore produces a nondeterministic solution on each run.
-# -> This should be linted against!!!
+# Repeat for CPU algorithm
+# tmp = time.time()
+# param['tree_method'] = 'hist'
+# cpu_res = {}
+# xgb.train(param, dtrain, num_round, evals=[(dtest, 'test')], evals_result=cpu_res)
+# print("CPU Training Time: %s seconds" % (str(time.time() - tmp)))
