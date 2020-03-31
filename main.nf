@@ -1,6 +1,6 @@
 process train_mnist_pytorch {
     echo true
-    container 'ml/pytorch:dev'
+    container 'mlflowcore/pytorch:dev'
 
     label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
 
@@ -14,7 +14,7 @@ process train_mnist_pytorch {
 
 process train_mnist_tensorflow {
     echo true
-    container 'ml/tensorflow:dev'
+    container 'mlflowcore/tensorflow:dev'
 
     label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
 
@@ -28,7 +28,7 @@ process train_mnist_tensorflow {
 
 process train_boston_xgboost {
     echo true
-    container 'ml/xgboost:dev'
+    container 'mlflowcore/xgboost:dev'
 
     label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
 
