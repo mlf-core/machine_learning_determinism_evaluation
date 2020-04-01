@@ -9,6 +9,8 @@ import torch.nn.functional as F
 import torch.optim as optim
 import numpy as np
 import random
+import time
+import os
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 
@@ -70,25 +72,27 @@ def test(model, device, test_loader):
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset), 100. * correct / len(test_loader.dataset)))
 
-def random_seed(seed_value, use_cuda):
-    np.random.seed(seed_value) # cpu vars
-    torch.manual_seed(seed_value) # cpu  vars
-    random.seed(seed_value) # Python
+def random_seed(seed, use_cuda):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed) 
+    random.seed(seed) # Python random
+    torch.manual_seed(seed)
     if use_cuda: 
-        torch.cuda.manual_seed(seed_value)
-        torch.cuda.manual_seed_all(seed_value) # gpu vars
-        torch.backends.cudnn.deterministic = True  #needed
-        torch.backends.cudnn.benchmark = False
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed) # For multiGPU
+        torch.backends.cudnn.deterministic = True  
+        torch.backends.cudnn.benchmark = False # Disable 
 
 
 @click.command()
+@click.option('--seed', type=int, default=0)
 @click.option('--epochs', type=int, default=10)
 @click.option('--no-cuda', type=bool, default=False)
-@click.option('--seed', type=int, default=0)
 @click.option('--log-interval', type=int, default=10)
 def start_training(epochs, no_cuda, seed, log_interval):
     use_cuda = not no_cuda and torch.cuda.is_available()
 
+    # Set all random seeds and possibly turn of GPU non determinism
     random_seed(seed, True)
 
     device = torch.device("cuda" if use_cuda else "cpu")
@@ -108,14 +112,25 @@ def start_training(epochs, no_cuda, seed, log_interval):
                 ])),
     batch_size=1000, shuffle=True, **kwargs)
 
-    model = Net().to(device)
+    model = Net()
+    if torch.cuda.device_count() > 1:
+      print("Let's use", torch.cuda.device_count(), "GPUs!")
+      model = nn.DataParallel(model)
+
+    model.to(device)
+
     optimizer = optim.Adadelta(model.parameters(), lr=1.0)
 
     scheduler = StepLR(optimizer, step_size=1, gamma=0.7)
+
+    gpu_runtime = time.time()
     for epoch in range(1, epochs + 1):
         train(log_interval, model, device, train_loader, optimizer, epoch)
         test(model, device, test_loader)
         scheduler.step()
+
+    print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
+    
 
 if __name__ == '__main__':
     start_training()

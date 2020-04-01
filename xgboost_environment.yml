@@ -3,6 +3,7 @@ channels:
     - conda-forge
     - defaults
 dependencies:
+    - defaults::click=7.1.1
     - defaults::cudatoolkit=10.1
     - conda-forge::graphviz=2.40.1
     - conda-forge::python-graphviz=0.13.2

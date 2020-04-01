@@ -22,7 +22,7 @@ process train_mnist_tensorflow {
 
     script:
     """
-    train_mnist_tensorflow.py
+    train_mnist_tensorflow_custom.py
     """
 }
 
@@ -36,6 +36,6 @@ process train_boston_xgboost {
 
     script:
     """
-    train_boston_xgboost.py
+    train_boston_xgboost.py --epochs ${params.epochs}
     """
 }

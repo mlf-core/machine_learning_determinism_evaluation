@@ -1,46 +1,58 @@
 #!/home/user/miniconda/envs/xgboost-1.0.2-cuda-10.1/bin/python
+import click
 import xgboost as xgb
 import numpy as np
 from sklearn.datasets import fetch_covtype
 from sklearn.model_selection import train_test_split
 import time
 import random
+import os
 
-# Fetch dataset using sklearn
-cov = fetch_covtype()
-X = cov.data
-y = cov.target
 
-np.random.seed(0)
-random.seed(0) # Python general seed
+@click.command()
+@click.option('--seed', type=int, default=0)
+@click.option('--epochs', type=int, default=10)
+@click.option('--no-cuda', type=bool, default=False)
+def train_covtype(seed, epochs, no_cuda):
+    # Fetch dataset using sklearn
+    cov = fetch_covtype()
+    X = cov.data
+    y = cov.target
 
-# Create 0.75/0.25 train/test split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
+    # Set random seeds
+    random_seed(seed)
 
-# Leave most parameters as default
-param = {'objective': 'multi:softmax',
+    # Create 0.75/0.25 train/test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
+
+    # Leave most parameters as default, but set the seed
+    param = {'objective': 'multi:softmax',
          'num_class': 8,
-         'seed': 0,
+         'seed': seed,
         # 'single_precision_histogram': True
          }
 
-# Convert input data from numpy to XGBoost format
-dtrain = xgb.DMatrix(X_train, label=y_train)
-dtest = xgb.DMatrix(X_test, label=y_test)
+    # Convert input data from numpy to XGBoost format
+    dtrain = xgb.DMatrix(X_train, label=y_train)
+    dtest = xgb.DMatrix(X_test, label=y_test)
 
-# Specify sufficient boosting iterations to reach a minimum
-num_round = 100
+    # Set CPU or GPU as training device
+    if no_cuda:
+        param['tree_method'] = 'hist'
+    else:
+        param['tree_method'] = 'gpu_hist'
 
-# GPU Training
-param['tree_method'] = 'gpu_hist'
-gpu_res = {}
-tmp = time.time()
-xgb.train(param, dtrain, num_round, evals=[(dtest, 'test')], evals_result=gpu_res)
-print("GPU Training Time: %s seconds" % (str(time.time() - tmp)))
+    # Train on the chosen device
+    gpu_res = {}
+    gpu_runtime = time.time()
+    xgb.train(param, dtrain, epochs, evals=[(dtest, 'test')], evals_result=gpu_res)
+    print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
 
-# Repeat for CPU algorithm
-# tmp = time.time()
-# param['tree_method'] = 'hist'
-# cpu_res = {}
-# xgb.train(param, dtrain, num_round, evals=[(dtest, 'test')], evals_result=cpu_res)
-# print("CPU Training Time: %s seconds" % (str(time.time() - tmp)))
+def random_seed(seed):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed)
+    random.seed(seed) # Python random
+
+
+if __name__ == '__main__':
+    train_covtype()
