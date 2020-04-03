@@ -5,6 +5,7 @@ LABEL authors="Lukas Heumos (lukas.heumos@posteo.net)" \
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
     curl \
+    wget \
     ca-certificates \
     sudo \
     git \
@@ -34,5 +35,5 @@ RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py37_
 ENV PATH=/home/user/miniconda/bin:$PATH
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
-# Update Conda first
+# Update Conda
 RUN conda update conda

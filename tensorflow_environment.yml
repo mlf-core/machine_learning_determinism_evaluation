@@ -4,7 +4,9 @@ channels:
     - defaults
 dependencies:
     - defaults::cudatoolkit=10.1
-    - defaults::tensorflow-gpu=2.1.0
+    #- defaults::tensorflow=2.1.0 -> distribute.MirroredStrategy API changed in 2.2 -> https://www.tensorflow.org/tutorials/distribute/custom_training
     - conda-forge::graphviz=2.40.1
     - conda-forge::python-graphviz=0.13.2
-
+    - pip
+    - pip:
+      - tensorflow==2.2.0rc2
