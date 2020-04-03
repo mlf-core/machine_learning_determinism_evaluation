@@ -8,5 +8,9 @@ RUN conda env create -f xgboost_environment.yml && conda clean -a
 RUN echo "source activate xgboost-1.0.2-cuda-10.1" > ~/.bashrc
 ENV PATH /opt/conda/envs/env/bin:$PATH
 
+# Install nightly 1.10 xgboost
+# https://s3-us-west-2.amazonaws.com/xgboost-nightly-builds/list.html
+RUN pip install https://s3-us-west-2.amazonaws.com/xgboost-nightly-builds/xgboost-1.1.0_SNAPSHOT%2B86beb68ce8ffa73a90def6a9862f0e8a917b58c3-py2.py3-none-manylinux1_x86_64.whl
+
 # Dump the details of the installed packages to a file for posterity
 RUN conda env export --name xgboost-1.0.2-cuda-10.1 > xgboost-1.0.2-cuda-10.1.yml
