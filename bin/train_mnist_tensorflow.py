@@ -1,12 +1,21 @@
-#!/home/user/miniconda/envs/tensorflow-2.1-cuda-10.1/bin/python
+#!/usr/bin/env python 
 import tensorflow as tf
 import numpy as np
 import argparse
 import time
+import random
+import os
 
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
 from tensorflow.keras import Model
 
+
+def random_seed(seed):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed)
+    random.seed(seed) # Python random
+    tf.random.set_seed(seed)
+    os.environ['TF_DETERMINISTIC_OPS'] = '1'
 
 # Not yet using click due to Docker issues
 parser = argparse.ArgumentParser(description='Tensorflow entry point')
@@ -44,6 +53,9 @@ train_dataset = tf.data.Dataset.from_tensor_slices((train_images, train_labels))
 test_dataset = tf.data.Dataset.from_tensor_slices((test_images, test_labels)).shuffle(BUFFER_SIZE).batch(GLOBAL_BATCH_SIZE) 
 train_dist_dataset = strategy.experimental_distribute_dataset(train_dataset)
 test_dist_dataset = strategy.experimental_distribute_dataset(test_dataset)
+
+# Fix seeds
+random_seed(0)
 
 # Define model
 def create_model():

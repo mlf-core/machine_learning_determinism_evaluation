@@ -20,15 +20,14 @@ def train_covtype(seed, epochs, no_cuda):
     y = cov.target
 
     # Set random seeds
-    random_seed(seed)
+    random_seed(seed, param)
 
     # Create 0.75/0.25 train/test split
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
 
     # Leave most parameters as default, but set the seed
     param = {'objective': 'multi:softmax',
-         'num_class': 8,
-         'seed': seed,
+         'num_class': 8
         # 'single_precision_histogram': True
          }
 
@@ -48,10 +47,11 @@ def train_covtype(seed, epochs, no_cuda):
     xgb.train(param, dtrain, epochs, evals=[(dtest, 'test')], evals_result=gpu_res)
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
 
-def random_seed(seed):
+def random_seed(seed, param):
     os.environ['PYTHONHASHSEED'] = str(seed) # Python general
     np.random.seed(seed)
     random.seed(seed) # Python random
+    param['seed'] = seed
 
 
 if __name__ == '__main__':
