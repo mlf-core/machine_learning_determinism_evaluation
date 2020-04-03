@@ -19,9 +19,6 @@ def train_covtype(seed, epochs, no_cuda):
     X = cov.data
     y = cov.target
 
-    # Set random seeds
-    random_seed(seed, param)
-
     # Create 0.75/0.25 train/test split
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
 
@@ -30,6 +27,9 @@ def train_covtype(seed, epochs, no_cuda):
          'num_class': 8
         # 'single_precision_histogram': True
          }
+
+    # Set random seeds
+    random_seed(seed, param)
 
     # Convert input data from numpy to XGBoost format
     dtrain = xgb.DMatrix(X_train, label=y_train)
