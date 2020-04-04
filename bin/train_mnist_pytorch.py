@@ -51,9 +51,8 @@ def train(log_interval, model, device, train_loader, optimizer, epoch):
         loss.backward()
         optimizer.step()
         if batch_idx % log_interval == 0:
-            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                epoch, batch_idx * len(data), len(train_loader.dataset),
-                100. * batch_idx / len(train_loader), loss.item()))
+            print(f'Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)}'
+                  f'({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}')
 
 
 def test(model, device, test_loader):
@@ -70,8 +69,9 @@ def test(model, device, test_loader):
 
     test_loss /= len(test_loader.dataset)
 
-    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
-        test_loss, correct, len(test_loader.dataset), 100. * correct / len(test_loader.dataset)))
+    print(f'\nTest set: Average loss: {test_loss:.4f}, '
+          f'Accuracy: {correct}/{len(test_loader.dataset)} ({100. * correct / len(test_loader.dataset):.0f}%)\n')
+    
 
 def random_seed(seed, use_cuda):
     os.environ['PYTHONHASHSEED'] = str(seed) # Python general
@@ -91,14 +91,15 @@ def random_seed(seed, use_cuda):
 @click.option('--no-cuda', type=bool, default=False)
 @click.option('--log-interval', type=int, default=10)
 def start_training(epochs, no_cuda, seed, log_interval):
-    use_cuda = not no_cuda and torch.cuda.is_available()
-
     # Set all random seeds and possibly turn of GPU non determinism
     random_seed(seed, True)
-
+    
+    # Set GPU settings
+    use_cuda = not no_cuda and torch.cuda.is_available()
     device = torch.device("cuda" if use_cuda else "cpu")
-
     kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
+
+    # Load training and testing data
     train_loader = torch.utils.data.DataLoader(
     datasets.MNIST('data', train=True, download=True,
                 transform=transforms.Compose([
@@ -113,22 +114,23 @@ def start_training(epochs, no_cuda, seed, log_interval):
                 ])),
     batch_size=1000, shuffle=True, **kwargs)
 
+    # Define model, device and optimizer
     model = Net()
     if torch.cuda.device_count() > 1:
-      print("Let's use", torch.cuda.device_count(), "GPUs!")
+      print(f'Using {torch.cuda.device_count()} GPUs!')
       model = nn.DataParallel(model)
-
     model.to(device)
-
     optimizer = optim.Adadelta(model.parameters(), lr=1.0)
+    # scheduler = StepLR(optimizer, step_size=1, gamma=0.7) decaying LR 
+    optimizer.step()
 
-    scheduler = StepLR(optimizer, step_size=1, gamma=0.7)
-
+    # Start training
     gpu_runtime = time.time()
     for epoch in range(1, epochs + 1):
         train(log_interval, model, device, train_loader, optimizer, epoch)
         test(model, device, test_loader)
-        scheduler.step()
+        # scheduler.step()
+        optimizer.step()
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
     
