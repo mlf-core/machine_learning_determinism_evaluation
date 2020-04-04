@@ -25,12 +25,12 @@ docker build -f Dockerfile_xgboost -t ml/xgboost:dev
 
 Running with docker:
 ```bash
-nextflow run main.nf --GPU ON -with-docker -
+nextflow run main.nf --GPU ON -with-docker -tensorflow/pytorch/xgboost
 ```
 
 Alternative you can use singularity to train your model:
 ```bash
-nextflow run main.nf --GPU ON -with-singularity
+nextflow run main.nf --GPU ON -with-singularity -tensorflow/pytorch/xgboost
 ```
 
 Omit the parameter `--GPU ON` to train on the CPU.
