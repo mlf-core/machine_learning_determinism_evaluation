@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/home/user/miniconda/envs/tensorflow-2.1-cuda-10.1/bin/python
 import tensorflow as tf
 import numpy as np
 import argparse

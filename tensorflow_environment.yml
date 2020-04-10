@@ -4,7 +4,11 @@ channels:
     - defaults
 dependencies:
     - defaults::cudatoolkit=10.1
-    #- defaults::tensorflow=2.1.0 -> distribute.MirroredStrategy API changed in 2.2 -> https://www.tensorflow.org/tutorials/distribute/custom_training
+    # We need to install tensorflow-gpu, since else we get:
+    # 2020-04-10 13:08:01.736473: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 418.87.1
+    # 2020-04-10 13:08:01.736534: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 440.82.0
+    # 2020-04-10 13:08:01.736556: E tensorflow/stream_executor/cuda/cuda_diagnostics.cc:313] kernel version 440.82.0 does not match DSO version 418.87.1 -- cannot find working devices in this configuration
+    - defaults::tensorflow-gpu=2.1.0 #-> distribute.MirroredStrategy API changed in 2.2 -> https://www.tensorflow.org/tutorials/distribute/custom_training
     - conda-forge::graphviz=2.40.1
     - conda-forge::python-graphviz=0.13.2
     - pip

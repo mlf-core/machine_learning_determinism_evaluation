@@ -14,8 +14,8 @@ process train_mnist_pytorch {
 
 process train_mnist_tensorflow {
     echo true
-    container 'tensorflow/tensorflow:2.2.0rc2-gpu-py3'
-    // container 'mlflowcore/tensorflow:dev'
+    // container 'tensorflow/tensorflow:2.2.0rc2-gpu-py3'
+    container 'mlflowcore/tensorflow:dev'
 
     label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
 
