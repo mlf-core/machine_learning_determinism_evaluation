@@ -22,13 +22,14 @@ class Net(nn.Module):
         self.conv2 = nn.Conv2d(32, 64, 3, 1)
         self.dropout1 = nn.Dropout2d(0.25)
         self.fc1 = nn.Linear(9216, 128)
-        self.dropout2 = nn.Dropout2d(0.5)
+        self.dropout2 = nn.Dropout2d(0.25)
         self.fc2 = nn.Linear(128, 10)
 
     def forward(self, x):
         x = self.conv1(x)
         x = F.relu(x)
         x = self.conv2(x)
+        x = F.relu(x)
         x = F.max_pool2d(x, 2)
         x = self.dropout1(x)
         x = torch.flatten(x, 1)
@@ -120,7 +121,7 @@ def start_training(epochs, no_cuda, seed, log_interval):
       print(f'Using {torch.cuda.device_count()} GPUs!')
       model = nn.DataParallel(model)
     model.to(device)
-    optimizer = optim.Adadelta(model.parameters(), lr=1.0)
+    optimizer = optim.Adam(model.parameters())
     # scheduler = StepLR(optimizer, step_size=1, gamma=0.7) decaying LR 
     optimizer.step()
 
