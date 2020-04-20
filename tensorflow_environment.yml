@@ -1,8 +1,9 @@
-name: tensorflow-2.1-cuda-10.1
+name: tensorflow-2.2-cuda-10.1
 channels:
     - conda-forge
     - defaults
 dependencies:
+    - defaults::click=7.1.1
     - defaults::cudatoolkit=10.1
     # We need to install tensorflow-gpu, since else we get:
     # 2020-04-10 13:08:01.736473: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 418.87.1
