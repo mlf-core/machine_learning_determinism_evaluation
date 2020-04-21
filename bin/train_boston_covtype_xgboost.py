@@ -14,7 +14,7 @@ import os
 @click.option('--epochs', type=int, default=10)
 @click.option('--no-cuda', type=bool, default=False)
 @click.option('--dataset', type=click.Choice(['boston', 'covertype']), default='covertype')
-def train_covtype(seed, epochs, no_cuda, dataset):
+def train(seed, epochs, no_cuda, dataset):
     # Fetch dataset using sklearn
     if dataset == 'boston':
         dataset = load_boston()
@@ -26,7 +26,7 @@ def train_covtype(seed, epochs, no_cuda, dataset):
         param = {'objective': 'multi:softmax',
          'num_class': 8
         # 'single_precision_histogram': True
-    }
+        }
 
     X = dataset.data
     y = dataset.target
@@ -64,4 +64,4 @@ def random_seed(seed, param):
 
 
 if __name__ == '__main__':
-    train_covtype()
+    train()

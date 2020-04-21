@@ -40,7 +40,7 @@ process train_mnist_tensorflow {
     """
 }
 
-process train_boston_xgboost {
+process train_boston_covtype_xgboost {
     echo true
     container 'mlflowcore/xgboost:dev'
 
@@ -54,9 +54,32 @@ process train_boston_xgboost {
     }
 
     when: params.xgboost
+    when: !params.platform == 'all_gpu'
 
     script:
     """
     train_boston_covtype_xgboost.py --epochs ${params.epochs} --dataset ${params.dataset} --no-cuda ${params.no_cuda}
+    """
+}
+
+process train_boston_covtype_dask_xgboost {
+    echo true
+    container 'mlflowcore/xgboost:dev'
+
+    switch (params.platform) {
+        case 'all_gpu': 
+        label 'with_all_gpus'
+        case 'single_gpu':
+        label 'with_single_gpu' 
+        case 'cpu':
+        label 'with_cpus'
+    }
+
+    when: params.xgboost
+    when: params.dask
+
+    script:
+    """
+    train_boston_covtype_dask_xgboost.py --epochs ${params.epochs} --dataset ${params.dataset} --n-gpus ${params.n_gpus}
     """
 }
