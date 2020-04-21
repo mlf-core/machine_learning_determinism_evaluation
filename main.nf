@@ -2,7 +2,14 @@ process train_mnist_pytorch {
     echo true
     container 'mlflowcore/pytorch:dev'
 
-    label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
+    switch (params.platform) {
+        case 'all_gpu': 
+        label 'with_all_gpus'
+        case 'single_gpu':
+        label 'with_single_gpu' 
+        case 'cpu': 
+        label 'with_cpus'
+    }
 
     when: params.pytorch
 
@@ -14,10 +21,16 @@ process train_mnist_pytorch {
 
 process train_mnist_tensorflow {
     echo true
-    // container 'tensorflow/tensorflow:2.2.0rc2-gpu-py3'
     container 'mlflowcore/tensorflow:dev'
 
-    label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
+    switch (params.platform) {
+        case 'all_gpu': 
+        label 'with_all_gpus'
+        case 'single_gpu':
+        label 'with_single_gpu' 
+        case 'cpu':
+        label 'with_cpus'
+    }
 
     when: params.tensorflow
 
@@ -31,12 +44,19 @@ process train_boston_xgboost {
     echo true
     container 'mlflowcore/xgboost:dev'
 
-    label (params.GPU == "ON" ? 'with_gpus': 'with_cpus')
+    switch (params.platform) {
+        case 'all_gpu': 
+        label 'with_all_gpus'
+        case 'single_gpu':
+        label 'with_single_gpu' 
+        case 'cpu':
+        label 'with_cpus'
+    }
 
     when: params.xgboost
 
     script:
     """
-    train_boston_xgboost.py --epochs ${params.epochs}
+    train_boston_covtype_xgboost.py --epochs ${params.epochs} --dataset ${params.dataset} --no-cuda ${params.no_cuda}
     """
 }

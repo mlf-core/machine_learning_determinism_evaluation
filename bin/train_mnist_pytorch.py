@@ -74,18 +74,6 @@ def test(model, device, test_loader):
           f'Accuracy: {correct}/{len(test_loader.dataset)} ({100. * correct / len(test_loader.dataset):.0f}%)\n')
     
 
-def random_seed(seed, use_cuda):
-    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
-    np.random.seed(seed) 
-    random.seed(seed) # Python random
-    torch.manual_seed(seed)
-    if use_cuda: 
-        torch.cuda.manual_seed(seed)
-        torch.cuda.manual_seed_all(seed) # For multiGPU
-        torch.backends.cudnn.deterministic = True  
-        torch.backends.cudnn.benchmark = False # Disable 
-
-
 @click.command()
 @click.option('--seed', type=int, default=0)
 @click.option('--epochs', type=int, default=10)
@@ -113,7 +101,7 @@ def start_training(epochs, no_cuda, seed, log_interval):
                     transforms.ToTensor(),
                     transforms.Normalize((0.1307,), (0.3081,))
                 ])),
-    batch_size=1000, shuffle=True, **kwargs)
+    batch_size=64, shuffle=True, **kwargs)
 
     # Define model, device and optimizer
     model = Net()
@@ -134,7 +122,19 @@ def start_training(epochs, no_cuda, seed, log_interval):
         optimizer.step()
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
-    
+
+
+def random_seed(seed, use_cuda):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed) 
+    random.seed(seed) # Python random
+    torch.manual_seed(seed)
+    if use_cuda: 
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed) # For multiGPU
+        torch.backends.cudnn.deterministic = True  
+        torch.backends.cudnn.benchmark = False # Disable 
+
 
 if __name__ == '__main__':
     print(f'Num GPUs Available: {torch.cuda.device_count()}')

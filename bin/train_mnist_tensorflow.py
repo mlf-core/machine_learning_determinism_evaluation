@@ -25,12 +25,6 @@ def create_model():
 
     return model
 
-def random_seed(seed):
-    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
-    np.random.seed(seed)
-    random.seed(seed) # Python random
-    tf.random.set_seed(seed)
-    os.environ['TF_DETERMINISTIC_OPS'] = '1'
 
 @click.command()
 @click.option('--seed', type=int, default=0)
@@ -146,6 +140,15 @@ def start_training(epochs, no_cuda, seed):
       test_accuracy.reset_states()
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
+
+
+def random_seed(seed):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed)
+    random.seed(seed) # Python random
+    tf.random.set_seed(seed)
+    os.environ['TF_DETERMINISTIC_OPS'] = '1'
+
 
 if __name__ == '__main__':
     print(f'Num GPUs Available: {len(tf.config.experimental.list_physical_devices("GPU"))}')
