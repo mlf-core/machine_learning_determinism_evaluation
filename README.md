@@ -30,12 +30,12 @@ Choose one of:
 
 Running with docker:
 ```bash
-nextflow run main.nf --platform all -with-docker -tensorflow/pytorch/xgboost
+nextflow run main.nf --platform all_gpu/single_cpu/cpu -with-docker -tensorflow/pytorch/xgboost
 ```
 
 Alternative you can use singularity to train your model:
 ```bash
-nextflow run main.nf --platform all -with-singularity -tensorflow/pytorch/xgboost
+nextflow run main.nf --platform all_gpu/single_cpu/cpu -with-singularity -tensorflow/pytorch/xgboost
 ```
 
 Note that to run xgboost on the CPU you also need to use the parameter --no_cuda.

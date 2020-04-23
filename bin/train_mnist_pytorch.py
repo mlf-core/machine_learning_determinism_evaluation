@@ -1,4 +1,4 @@
-#!/home/user/miniconda/envs/pytorch-1.4-cuda-10.1/bin/python
+#!/home/user/miniconda/envs/pytorch-1.5-cuda-10.1/bin/python
     
 from __future__ import print_function
 import argparse
@@ -76,12 +76,12 @@ def test(model, device, test_loader):
 
 @click.command()
 @click.option('--seed', type=int, default=0)
-@click.option('--epochs', type=int, default=10)
+@click.option('--epochs', type=int, default=100)
 @click.option('--no-cuda', type=bool, default=False)
 @click.option('--log-interval', type=int, default=10)
 def start_training(epochs, no_cuda, seed, log_interval):
     # Set all random seeds and possibly turn of GPU non determinism
-    random_seed(seed, True)
+    # random_seed(seed, True)
     
     # Set GPU settings
     use_cuda = not no_cuda and torch.cuda.is_available()
