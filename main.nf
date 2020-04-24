@@ -1,15 +1,15 @@
 process train_mnist_pytorch {
     echo true
     container 'mlflowcore/pytorch:dev'
-
-    switch (params.platform) {
-        case 'all_gpu': 
+    
+    if(params.platform == 'all_gpu') {
         label 'with_all_gpus'
-        case 'single_gpu':
-        label 'with_single_gpu' 
-        case 'cpu': 
+    } else if (params.platform == 'single_gpu') {
+        label 'with_single_gpu'
+    } else {
         label 'with_cpus'
-    }
+    }   
+
 
     when: params.pytorch
 
