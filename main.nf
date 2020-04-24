@@ -2,7 +2,7 @@ process train_mnist_pytorch {
     echo true
     container 'mlflowcore/pytorch:dev'
     
-    if(params.platform == 'all_gpu') {
+    if (params.platform == 'all_gpu') {
         label 'with_all_gpus'
     } else if (params.platform == 'single_gpu') {
         label 'with_single_gpu'

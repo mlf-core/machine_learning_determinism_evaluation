@@ -81,7 +81,7 @@ def test(model, device, test_loader):
 @click.option('--log-interval', type=int, default=10)
 def start_training(epochs, no_cuda, seed, log_interval):
     # Set all random seeds and possibly turn of GPU non determinism
-    # random_seed(seed, True)
+    random_seed(seed, True)
     
     # Set GPU settings
     use_cuda = not no_cuda and torch.cuda.is_available()
@@ -132,8 +132,8 @@ def random_seed(seed, use_cuda):
     if use_cuda: 
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed) # For multiGPU
-        torch.backends.cudnn.deterministic = True  
-        torch.backends.cudnn.benchmark = False # Disable 
+    #    torch.backends.cudnn.deterministic = True  
+    #    torch.backends.cudnn.benchmark = False # Disable 
 
 
 if __name__ == '__main__':
