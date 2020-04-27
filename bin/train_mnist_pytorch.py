@@ -132,8 +132,8 @@ def random_seed(seed, use_cuda):
     if use_cuda: 
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed) # For multiGPU
-    #    torch.backends.cudnn.deterministic = True  
-    #    torch.backends.cudnn.benchmark = False # Disable 
+        torch.backends.cudnn.deterministic = True  
+        torch.backends.cudnn.benchmark = False # Disable 
 
 
 if __name__ == '__main__':
