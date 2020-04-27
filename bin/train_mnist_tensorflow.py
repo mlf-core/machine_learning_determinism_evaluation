@@ -60,7 +60,7 @@ def start_training(epochs, no_cuda, seed):
   test_dist_dataset = strategy.experimental_distribute_dataset(test_dataset)
 
   # Fix seeds
-  random_seed(0)
+  # random_seed(seed)
 
   # Define Loss and accuracyc metrics
   with strategy.scope():
