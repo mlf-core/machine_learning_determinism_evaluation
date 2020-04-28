@@ -60,7 +60,7 @@ def start_training(epochs, no_cuda, seed):
   test_dist_dataset = strategy.experimental_distribute_dataset(test_dataset)
 
   # Fix seeds
-  # random_seed(seed)
+  random_seed(seed)
 
   # Define Loss and accuracyc metrics
   with strategy.scope():
@@ -147,7 +147,9 @@ def random_seed(seed):
     np.random.seed(seed)
     random.seed(seed) # Python random
     tf.random.set_seed(seed)
-    os.environ['TF_DETERMINISTIC_OPS'] = '1'
+    #session_config.intra_op_parallelism_threads = 1 # CPU only -> https://github.com/NVIDIA/tensorflow-determinism
+    #session_config.inter_op_parallelism_threads = 1 # CPU only
+    #os.environ['TF_DETERMINISTIC_OPS'] = '1'
 
 
 if __name__ == '__main__':
