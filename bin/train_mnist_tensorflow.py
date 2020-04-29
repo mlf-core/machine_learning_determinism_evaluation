@@ -147,8 +147,8 @@ def random_seed(seed):
     np.random.seed(seed)
     random.seed(seed) # Python random
     tf.random.set_seed(seed)
-    session_config.intra_op_parallelism_threads = 1 # CPU only -> https://github.com/NVIDIA/tensorflow-determinism
-    session_config.inter_op_parallelism_threads = 1 # CPU only
+    tf.config.threading.set_intra_op_parallelism_threads = 1 # CPU only -> https://github.com/NVIDIA/tensorflow-determinism
+    tf.config.threading.set_inter_op_parallelism_threads = 1 # CPU only
     os.environ['TF_DETERMINISTIC_OPS'] = '1'
 
 
