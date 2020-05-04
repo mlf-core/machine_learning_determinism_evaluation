@@ -16,7 +16,7 @@ import os
 
 @click.command()
 @click.option('--seed', type=int, default=0)
-@click.option('--epochs', type=int, default=10)
+@click.option('--epochs', type=int, default=25)
 @click.option('--n-gpus', type=int, default=2)
 @click.option('--dataset', type=click.Choice(['boston', 'covertype']), default='covertype')
 def train(seed, epochs, n_gpus, dataset):
@@ -30,19 +30,23 @@ def train(seed, epochs, n_gpus, dataset):
                 }
             elif dataset == 'covertype':
                 dataset = fetch_covtype()
-                param = {'objective': 'multi:softmax',
-                'num_class': 8
-                # 'single_precision_histogram': True
+                param = {
+                    'objective': 'multi:softmax',
+                    'num_class': 8
+                    # 'single_precision_histogram': True
                 }
             
             param['verbosity'] = 2
             param['tree_method'] = 'gpu_hist'
 
-            X = da.from_array(dataset.data)
-            y = da.from_array(dataset.target)
+            # Rechunking is required for the covertype dataset
+            X = da.from_array(dataset.data, chunks=1000)
+            y = da.from_array(dataset.target, chunks=1000)
 
             dtrain = DaskDMatrix(client, X, y)
 
+            random_seed(seed)
+            
             output = xgb.dask.train(client,
                                     param,
                                     dtrain,

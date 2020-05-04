@@ -23,9 +23,10 @@ def train(seed, epochs, no_cuda, dataset):
         }
     elif dataset == 'covertype':
         dataset = fetch_covtype()
-        param = {'objective': 'multi:softmax',
-         'num_class': 8
-        # 'single_precision_histogram': True
+        param = {
+            'objective': 'multi:softmax',
+            'num_class': 8
+            # 'single_precision_histogram': True
         }
 
     X = dataset.data
