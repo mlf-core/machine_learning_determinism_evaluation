@@ -13,4 +13,7 @@ dependencies:
     - conda-forge::scikit-learn==0.22.1
     - pip
     - pip:
-      - xgboost==1.0.2 # xgboost on Conda is not yet built with GPU support!
+    #  - xgboost==1.0.2 # xgboost on Conda is not yet built with GPU support!
+    #   https://s3-us-west-2.amazonaws.com/xgboost-nightly-builds/list.html
+    #  - https://s3-us-west-2.amazonaws.com/xgboost-nightly-builds/xgboost-1.1.0_SNAPSHOT%2B86beb68ce8ffa73a90def6a9862f0e8a917b58c3-py2.py3-none-manylinux1_x86_64.whl
+      - xgboost==1.1.0rc2

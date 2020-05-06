@@ -11,7 +11,7 @@ import os
 
 @click.command()
 @click.option('--seed', type=int, default=0)
-@click.option('--epochs', type=int, default=10)
+@click.option('--epochs', type=int, default=25)
 @click.option('--no-cuda', type=bool, default=False)
 @click.option('--dataset', type=click.Choice(['boston', 'covertype']), default='covertype')
 def train(seed, epochs, no_cuda, dataset):
@@ -37,13 +37,16 @@ def train(seed, epochs, no_cuda, dataset):
 
     # Set random seeds
     random_seed(seed, param)
+    param['subsample'] = 0.5
+    param['colsample_bytree'] = 0.5
+    param['colsample_bylevel'] = 0.5
 
     # Convert input data from numpy to XGBoost format
     dtrain = xgb.DMatrix(X_train, label=y_train)
     dtest = xgb.DMatrix(X_test, label=y_test)
 
     # Set CPU or GPU as training device
-    if no_cuda :
+    if no_cuda:
         param['tree_method'] = 'hist'
     else:
         param['tree_method'] = 'gpu_hist'

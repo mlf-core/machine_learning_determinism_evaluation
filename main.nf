@@ -56,7 +56,7 @@ process train_boston_covtype_xgboost {
 
     script:
     """
-    train_boston_covtype_xgboost.py --epochs ${params.epochs} --dataset ${params.dataset} --no-cuda ${params.no_cuda}
+    train_boston_covtype_xgboost.py --epochs ${params.epochs} --dataset ${params.dataset} --no-cuda ${params.no_cuda} --seed ${params.seed}
     """
 }
 

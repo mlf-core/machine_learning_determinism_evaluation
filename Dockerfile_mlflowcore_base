@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-base-ubuntu18.04
+FROM nvidia/cuda:10.2-base-ubuntu18.04
 LABEL authors="Lukas Heumos (lukas.heumos@posteo.net)" \
       description="Docker image containing all requirements for running machine learning on CUDA enabled GPUs"
 
