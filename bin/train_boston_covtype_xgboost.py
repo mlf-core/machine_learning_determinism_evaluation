@@ -19,14 +19,14 @@ def train(seed, epochs, no_cuda, dataset):
     if dataset == 'boston':
         dataset = load_boston()
         param = {
-
+            # 'single_precision_histogram': True
         }
     elif dataset == 'covertype':
         dataset = fetch_covtype()
         param = {
             'objective': 'multi:softmax',
-            'num_class': 8
-            # 'single_precision_histogram': True
+            'num_class': 8,
+            'single_precision_histogram': True
         }
 
     X = dataset.data
@@ -36,7 +36,7 @@ def train(seed, epochs, no_cuda, dataset):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
 
     # Set random seeds
-    random_seed(seed, param)
+    # random_seed(seed, param)
     param['subsample'] = 0.5
     param['colsample_bytree'] = 0.5
     param['colsample_bylevel'] = 0.5
