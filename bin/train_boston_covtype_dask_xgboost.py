@@ -42,16 +42,22 @@ def train(seed, epochs, n_gpus, dataset):
             # Rechunking is required for the covertype dataset
             X = da.from_array(dataset.data, chunks=1000)
             y = da.from_array(dataset.target, chunks=1000)
-
-            dtrain = DaskDMatrix(client, X, y)
-
-            random_seed(seed)
             
+            # Create 0.75/0.25 train/test split
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
+
+            dtrain = DaskDMatrix(client, X_train, y_train)
+            dtest = DaskDMatrix(client, X_test, y_test)
+
+            random_seed(seed, param)
+            
+            gpu_runtime = time.time()
             output = xgb.dask.train(client,
                                     param,
                                     dtrain,
                                     num_boost_round=epochs,
-                                    evals=[(dtrain, 'train')])
+                                    evals=[(dtest, 'test')])
+            print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
             
             print(output)
 

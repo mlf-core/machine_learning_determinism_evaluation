@@ -77,6 +77,6 @@ process train_boston_covtype_dask_xgboost {
 
     script:
     """
-    train_boston_covtype_dask_xgboost.py --epochs ${params.epochs} --dataset ${params.dataset} --n-gpus ${params.n_gpus}
+    train_boston_covtype_dask_xgboost.py --epochs ${params.epochs} --dataset ${params.dataset} --n-gpus ${params.n_gpus} --seed ${params.seed}
     """
 }
