@@ -39,3 +39,8 @@ nextflow run main.nf --platform all_gpu/single_gpu/cpu -with-singularity -tensor
 ```
 
 Note that to run xgboost on the CPU you also need to use the parameter --no_cuda.
+
+Running multiple GPUs on the local Dask cluster using XGBoost:
+```bash
+nextflow run main.nf -with-docker --platform all_gpu --xgboost --dataset boston --epochs 1000 --dask --n_gpus 2
+```

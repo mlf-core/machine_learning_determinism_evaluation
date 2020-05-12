@@ -26,7 +26,7 @@ def train(seed, epochs, n_gpus, dataset):
             if dataset == 'boston':
                 dataset = load_boston()
                 param = {
-
+                    # 'single_precision_histogram': True
                 }
             elif dataset == 'covertype':
                 dataset = fetch_covtype()
@@ -49,7 +49,7 @@ def train(seed, epochs, n_gpus, dataset):
             dtrain = DaskDMatrix(client, X_train, y_train)
             dtest = DaskDMatrix(client, X_test, y_test)
 
-            random_seed(seed, param)
+            # random_seed(seed, param)
             
             gpu_runtime = time.time()
             output = xgb.dask.train(client,
