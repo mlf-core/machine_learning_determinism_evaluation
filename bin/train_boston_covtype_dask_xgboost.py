@@ -8,7 +8,7 @@ from xgboost.dask import DaskDMatrix
 import dask.array as da
 import numpy as np
 from sklearn.datasets import fetch_covtype, load_boston
-from sklearn.model_selection import train_test_split
+from dask_ml.model_selection import train_test_split
 import time
 import random
 import os
@@ -16,7 +16,7 @@ import os
 
 @click.command()
 @click.option('--seed', type=int, default=0)
-@click.option('--epochs', type=int, default=25)
+@click.option('--epochs', type=int, default=10)
 @click.option('--n-gpus', type=int, default=2)
 @click.option('--dataset', type=click.Choice(['boston', 'covertype']), default='covertype')
 def train(seed, epochs, n_gpus, dataset):
@@ -26,7 +26,7 @@ def train(seed, epochs, n_gpus, dataset):
             if dataset == 'boston':
                 dataset = load_boston()
                 param = {
-                    # 'single_precision_histogram': True
+
                 }
             elif dataset == 'covertype':
                 dataset = fetch_covtype()
@@ -42,24 +42,22 @@ def train(seed, epochs, n_gpus, dataset):
             # Rechunking is required for the covertype dataset
             X = da.from_array(dataset.data, chunks=1000)
             y = da.from_array(dataset.target, chunks=1000)
-            
+
             # Create 0.75/0.25 train/test split
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
 
             dtrain = DaskDMatrix(client, X_train, y_train)
             dtest = DaskDMatrix(client, X_test, y_test)
 
-            # random_seed(seed, param)
+            random_seed(seed, param)
             
-            gpu_runtime = time.time()
-            output = xgb.dask.train(client,
+            model_training_results = xgb.dask.train(client,
                                     param,
                                     dtrain,
                                     num_boost_round=epochs,
                                     evals=[(dtest, 'test')])
-            print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
             
-            print(output)
+            print(model_training_results)
 
 
 def random_seed(seed, param):
