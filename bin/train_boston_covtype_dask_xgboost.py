@@ -51,6 +51,7 @@ def train(seed, epochs, n_gpus, dataset):
 
             random_seed(seed, param)
             
+            gpu_runtime = time.time()
             model_training_results = xgb.dask.train(client,
                                     param,
                                     dtrain,
@@ -58,6 +59,7 @@ def train(seed, epochs, n_gpus, dataset):
                                     evals=[(dtest, 'test')])
             
             print(model_training_results)
+            print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
 
 
 def random_seed(seed, param):
