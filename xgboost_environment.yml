@@ -7,9 +7,8 @@ dependencies:
     - defaults::click=7.1.1
     - defaults::cudatoolkit=10.1
     - conda-forge::dask==2.14.0
+    - conda-forge::dask-ml==1.4.0
     - rapidsai::dask-cuda==0.13.0
-    - conda-forge::graphviz=2.40.1
-    - conda-forge::python-graphviz=0.13.2
     - conda-forge::scikit-learn==0.22.1
     - pip
     - pip:

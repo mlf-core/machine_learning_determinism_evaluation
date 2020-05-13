@@ -8,7 +8,7 @@ from xgboost.dask import DaskDMatrix
 import dask.array as da
 import numpy as np
 from sklearn.datasets import fetch_covtype, load_boston
-from sklearn.model_selection import train_test_split
+from dask_ml.model_selection import train_test_split
 import time
 import random
 import os
@@ -43,17 +43,21 @@ def train(seed, epochs, n_gpus, dataset):
             X = da.from_array(dataset.data, chunks=1000)
             y = da.from_array(dataset.target, chunks=1000)
 
-            dtrain = DaskDMatrix(client, X, y)
+            # Create 0.75/0.25 train/test split
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, train_size=0.75, random_state=0)
+
+            dtrain = DaskDMatrix(client, X_train, y_train)
+            dtest = DaskDMatrix(client, X_test, y_test)
 
             random_seed(seed, param)
             
-            output = xgb.dask.train(client,
+            model_training_results = xgb.dask.train(client,
                                     param,
                                     dtrain,
                                     num_boost_round=epochs,
-                                    evals=[(dtrain, 'train')])
+                                    evals=[(dtest, 'test')])
             
-            print(output)
+            print(model_training_results)
 
 
 def random_seed(seed, param):
