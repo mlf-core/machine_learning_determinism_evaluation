@@ -37,3 +37,5 @@ ENV CONDA_AUTO_UPDATE_CONDA=false
 
 # Update Conda
 RUN conda update conda
+
+ENV XTERM xterm-256color

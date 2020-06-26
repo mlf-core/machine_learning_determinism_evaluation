@@ -51,8 +51,7 @@ process train_boston_covtype_xgboost {
         label 'with_cpus'
     } 
 
-    when: params.xgboost
-    when: params.platform == 'single_gpu' || params.platform == 'cpu'
+    when: params.xgboost && (params.platform == 'single_gpu' || params.platform == 'cpu')
 
     script:
     """
@@ -72,8 +71,7 @@ process train_boston_covtype_dask_xgboost {
         label 'with_cpus'
     } 
 
-    when: params.xgboost
-    when: params.dask
+    when: params.xgboost && params.dask
 
     script:
     """
