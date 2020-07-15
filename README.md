@@ -16,10 +16,10 @@ Training a simple 2d convolutional neural network (2d conv, 2d conv, dropout (0.
 ## Building the docker images locally
 
 ```bash
-docker build -f Dockerfile_mlflowcore_base -t mlflowcore/base:1.0.0 
-docker build -f Dockerfile_pytorch -t mlflowcore/pytorch:dev
-docker build -f Dockerfile_tensorflow -t mlflowcore/tensorflow:dev
-docker build -f Dockerfile_xgboost -t mlflowcore/xgboost:dev
+docker build -f Dockerfile_mlflowcore_base -t mlflowcore/base:1.0.0 .
+docker build -f Dockerfile_pytorch -t mlflowcore/pytorch:dev .
+docker build -f Dockerfile_tensorflow -t mlflowcore/tensorflow:dev .
+docker build -f Dockerfile_xgboost -t mlflowcore/xgboost:dev .
 ```
 
 ## Running on your chosen platform
@@ -30,12 +30,12 @@ Choose one of:
 
 Running with docker:
 ```bash
-nextflow run main.nf --platform all_gpu/single_gpu/cpu -with-docker -tensorflow/pytorch/xgboost
+nextflow run main.nf --platform all_gpu/single_gpu/cpu -with-docker --tensorflow/pytorch/xgboost
 ```
 
 Alternative you can use singularity to train your model:
 ```bash
-nextflow run main.nf --platform all_gpu/single_gpu/cpu -with-singularity -tensorflow/pytorch/xgboost
+nextflow run main.nf --platform all_gpu/single_gpu/cpu -with-singularity --tensorflow/pytorch/xgboost
 ```
 
 Note that to run xgboost on the CPU you also need to use the parameter --no_cuda.
