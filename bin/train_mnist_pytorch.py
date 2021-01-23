@@ -76,7 +76,7 @@ def test(model, device, test_loader):
 
 @click.command()
 @click.option('--seed', type=int, default=0)
-@click.option('--epochs', type=int, default=100)
+@click.option('--epochs', type=int, default=10)
 @click.option('--no-cuda', type=bool, default=False)
 @click.option('--log-interval', type=int, default=10)
 def start_training(epochs, no_cuda, seed, log_interval):
