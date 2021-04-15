@@ -1,0 +1,106 @@
+setup,framework,version,loss,accuracy,run time [s],system,dataset,processing unit
+random,pytorch,1.5,0.0460,99.23,3108.5595,system_1,mnist,CPU
+random,pytorch,1.5,0.0410,99.07,2986.8335,system_1,mnist,CPU
+random,pytorch,1.5,0.0424,99.15,3093.4522,system_1,mnist,CPU
+random,pytorch,1.5,0.0441,99.11,3083.8711,system_1,mnist,CPU
+random,pytorch,1.5,0.0458,99.05,3228.8223,system_1,mnist,CPU
+seeds,pytorch,1.5,0.0461,99.19,3180.3452,system_1,mnist,CPU
+seeds,pytorch,1.5,0.0461,99.19,2756.4523,system_1,mnist,CPU
+seeds,pytorch,1.5,0.0461,99.19,2604.9841,system_1,mnist,CPU
+seeds,pytorch,1.5,0.0461,99.19,2775.5341,system_1,mnist,CPU
+seeds,pytorch,1.5,0.0461,99.19,2964.5194,system_1,mnist,CPU
+deterministic,pytorch,1.5,0.0461,99.19,3011.5417,system_1,mnist,CPU
+deterministic,pytorch,1.5,0.0461,99.19,2965.2349,system_1,mnist,CPU
+deterministic,pytorch,1.5,0.0461,99.19,2695.5439,system_1,mnist,CPU
+deterministic,pytorch,1.5,0.0461,99.19,3135.0953,system_1,mnist,CPU
+deterministic,pytorch,1.5,0.0461,99.19,2841.3459,system_1,mnist,CPU
+random,pytorch,1.5,0.0465,99.17,395.4389,system_1,mnist,single GPU
+random,pytorch,1.5,0.0421,99.17,393.4235,system_1,mnist,single GPU
+random,pytorch,1.5,0.0552,98.98,358.9548,system_1,mnist,single GPU
+random,pytorch,1.5,0.0516,99.13,391.5345,system_1,mnist,single GPU
+random,pytorch,1.5,0.0525,99.18,402.5934,system_1,mnist,single GPU
+seeds,pytorch,1.5,0.0485,99.04,424.5834,system_1,mnist,single GPU
+seeds,pytorch,1.5,0.0548,99.27,431.5415,system_1,mnist,single GPU
+seeds,pytorch,1.5,0.0585,99.10,445.4346,system_1,mnist,single GPU
+seeds,pytorch,1.5,0.0475,99.58,459.4512,system_1,mnist,single GPU
+seeds,pytorch,1.5,0.0558,99.31,463.4389,system_1,mnist,single GPU
+deterministic,pytorch,1.5,0.0513,99.10,412.3491,system_1,mnist,single GPU
+deterministic,pytorch,1.5,0.0513,99.10,443.4390,system_1,mnist,single GPU
+deterministic,pytorch,1.5,0.0513,99.10,453.4435,system_1,mnist,single GPU
+deterministic,pytorch,1.5,0.0513,99.10,418.9831,system_1,mnist,single GPU
+deterministic,pytorch,1.5,0.0513,99.10,459.3049,system_1,mnist,single GPU
+random,pytorch,1.5,0.0474,99.11,436.0226,system_1,mnist,multi GPU
+random,pytorch,1.5,0.0444,99.19,439.8643,system_1,mnist,multi GPU
+random,pytorch,1.5,0.0531,99.09,447.8019,system_1,mnist,multi GPU
+random,pytorch,1.5,0.0411,99.09,447.8048,system_1,mnist,multi GPU
+random,pytorch,1.5,0.0427,99.26,441.5270,system_1,mnist,multi GPU
+seeds,pytorch,1.5,0.0544,99.13,388.1492,system_1,mnist,multi GPU
+seeds,pytorch,1.5,0.0462,99.64,385.9251,system_1,mnist,multi GPU
+seeds,pytorch,1.5,0.0529,99.24,377.1794,system_1,mnist,multi GPU
+seeds,pytorch,1.5,0.0510,99.52,398.5191,system_1,mnist,multi GPU
+seeds,pytorch,1.5,0.0462,99.33,354.4912,system_1,mnist,multi GPU
+deterministic,pytorch,1.5,0.0472,99.09,418.1905,system_1,mnist,multi GPU
+deterministic,pytorch,1.5,0.0472,99.09,416.4052,system_1,mnist,multi GPU
+deterministic,pytorch,1.5,0.0472,99.09,417.2494,system_1,mnist,multi GPU
+deterministic,pytorch,1.5,0.0472,99.09,422.6271,system_1,mnist,multi GPU
+deterministic,pytorch,1.5,0.0472,99.09,434.5912,system_1,mnist,multi GPU
+random,pytorch,1.5,0.0456,99.14,2039.1064,system_4,mnist,CPU
+random,pytorch,1.5,0.0440,99.21,2037.3539,system_4,mnist,CPU
+random,pytorch,1.5,0.0463,99.04,1918.5859,system_4,mnist,CPU
+random,pytorch,1.5,0.0387,99.19,2154.5886,system_4,mnist,CPU
+random,pytorch,1.5,0.0520,98.94,2040.2472,system_4,mnist,CPU
+seeds,pytorch,1.5,0.0467,99.17,2113.0479,system_4,mnist,CPU
+seeds,pytorch,1.5,0.0467,99.17,2031.9475,system_4,mnist,CPU
+seeds,pytorch,1.5,0.0467,99.17,2247.6193,system_4,mnist,CPU
+seeds,pytorch,1.5,0.0467,99.17,2147.4897,system_4,mnist,CPU
+seeds,pytorch,1.5,0.0467,99.17,2132.9865,system_4,mnist,CPU
+deterministic,pytorch,1.5,0.0467,99.17,2052.0372,system_4,mnist,CPU
+deterministic,pytorch,1.5,0.0467,99.17,2198.5921,system_4,mnist,CPU
+deterministic,pytorch,1.5,0.0467,99.17,2265.5523,system_4,mnist,CPU
+deterministic,pytorch,1.5,0.0467,99.17,2035.1244,system_4,mnist,CPU
+deterministic,pytorch,1.5,0.0467,99.17,1980.6544,system_4,mnist,CPU
+random,pytorch,1.5,0.0409,99.17,319.1072,system_4,mnist,single GPU
+random,pytorch,1.5,0.0447,99.18,311.6777,system_4,mnist,single GPU
+random,pytorch,1.5,0.0523,99.11,327.0770,system_4,mnist,single GPU
+random,pytorch,1.5,0.0417,99.24,325.4690,system_4,mnist,single GPU
+random,pytorch,1.5,0.0552,98.98,318.9567,system_4,mnist,single GPU
+seeds,pytorch,1.5,0.0409,99.27,323.2651,system_4,mnist,single GPU
+seeds,pytorch,1.5,0.0447,99.08,317.6276,system_4,mnist,single GPU
+seeds,pytorch,1.5,0.0445,99.18,317.4432,system_4,mnist,single GPU
+seeds,pytorch,1.5,0.0428,99.20,323.9803,system_4,mnist,single GPU
+seeds,pytorch,1.5,0.0425,99.09,322.6828,system_4,mnist,single GPU
+deterministic,pytorch,1.5,0.0419,99.21,325.8114,system_4,mnist,single GPU
+deterministic,pytorch,1.5,0.0419,99.21,325.9602,system_4,mnist,single GPU
+deterministic,pytorch,1.5,0.0419,99.21,328.9970,system_4,mnist,single GPU
+deterministic,pytorch,1.5,0.0419,99.21,337.2099,system_4,mnist,single GPU
+deterministic,pytorch,1.5,0.0419,99.21,322.9131,system_4,mnist,single GPU
+System 2 deterministic,pytorch,1.5,0.0517,99.16,2030.7641,system_2,mnist,CPU
+System 2 deterministic,pytorch,1.5,0.0517,99.16,1952.9510,system_2,mnist,CPU
+System 2 deterministic,pytorch,1.5,0.0517,99.16,2012.2102,system_2,mnist,CPU
+System 2 deterministic,pytorch,1.5,0.0517,99.16,2096.9514,system_2,mnist,CPU
+System 2 deterministic,pytorch,1.5,0.0517,99.16,1849.2818,system_2,mnist,CPU
+System 3 deterministic,pytorch,1.5,0.0517,99.16,1749.2395,system_3,mnist,CPU
+System 3 deterministic,pytorch,1.5,0.0517,99.16,1740.2913,system_3,mnist,CPU
+System 3 deterministic,pytorch,1.5,0.0517,99.16,1931.3451,system_3,mnist,CPU
+System 3 deterministic,pytorch,1.5,0.0517,99.16,2014.3413,system_3,mnist,CPU
+System 3 deterministic,pytorch,1.5,0.0517,99.16,2859.2994,system_3,mnist,CPU
+System 2 deterministic,pytorch,1.5,0.0428,99.23,401.5341,system_2,mnist,single GPU
+System 2 deterministic,pytorch,1.5,0.0428,99.23,406.2310,system_2,mnist,single GPU
+System 2 deterministic,pytorch,1.5,0.0428,99.23,417.2372,system_2,mnist,single GPU
+System 2 deterministic,pytorch,1.5,0.0428,99.23,399.1958,system_2,mnist,single GPU
+System 2 deterministic,pytorch,1.5,0.0428,99.23,396.1150,system_2,mnist,single GPU
+System 3 deterministic,pytorch,1.5,0.0428,99.23,387.4189,system_3,mnist,single GPU
+System 3 deterministic,pytorch,1.5,0.0428,99.23,401.9515,system_3,mnist,single GPU
+System 3 deterministic,pytorch,1.5,0.0428,99.23,402.3459,system_3,mnist,single GPU
+System 3 deterministic,pytorch,1.5,0.0428,99.23,386.4914,system_3,mnist,single GPU
+System 3 deterministic,pytorch,1.5,0.0428,99.23,403.4321,system_3,mnist,single GPU
+System 2 deterministic,pytorch,1.5,0.0430,99.15,311.3091,system_2,mnist,multi GPU
+System 2 deterministic,pytorch,1.5,0.0430,99.15,301.5559,system_2,mnist,multi GPU
+System 2 deterministic,pytorch,1.5,0.0430,99.15,285.4581,system_2,mnist,multi GPU
+System 2 deterministic,pytorch,1.5,0.0430,99.15,340.6679,system_2,mnist,multi GPU
+System 2 deterministic,pytorch,1.5,0.0430,99.15,358.9812,system_2,mnist,multi GPU
+System 3 deterministic,pytorch,1.5,0.0430,99.15,299.4910,system_3,mnist,multi GPU
+System 3 deterministic,pytorch,1.5,0.0430,99.15,385.4814,system_3,mnist,multi GPU
+System 3 deterministic,pytorch,1.5,0.0430,99.15,343.1839,system_3,mnist,multi GPU
+System 3 deterministic,pytorch,1.5,0.0430,99.15,314.4290,system_3,mnist,multi GPU
+System 3 deterministic,pytorch,1.5,0.0430,99.15,344.6633,system_3,mnist,multi GPU

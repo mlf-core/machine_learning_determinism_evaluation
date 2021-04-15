@@ -1,0 +1,106 @@
+setup,framework,version,loss,accuracy,run time [s],system,dataset,processing unit
+random,tensorflow,2.2,0.0468,99.14,620.3357,system_1,mnist,CPU
+random,tensorflow,2.2,0.0476,99.14,629.2933,system_1,mnist,CPU
+random,tensorflow,2.2,0.0439,99.22,624.3774,system_1,mnist,CPU
+random,tensorflow,2.2,0.0519,99.12,625.7100,system_1,mnist,CPU
+random,tensorflow,2.2,0.0413,99.16,622.6711,system_1,mnist,CPU
+seeds,tensorflow,2.2,0.0513,99.16,612.5385,system_1,mnist,CPU
+seeds,tensorflow,2.2,0.0513,99.16,627.0478,system_1,mnist,CPU
+seeds,tensorflow,2.2,0.0513,99.16,654.6451,system_1,mnist,CPU
+seeds,tensorflow,2.2,0.0513,99.16,656.4156,system_1,mnist,CPU
+seeds,tensorflow,2.2,0.0513,99.16,628.3192,system_1,mnist,CPU
+deterministic,tensorflow,2.2,0.0468,99.16,604.2396,system_1,mnist,CPU
+deterministic,tensorflow,2.2,0.0468,99.16,664.2041,system_1,mnist,CPU
+deterministic,tensorflow,2.2,0.0468,99.16,622.7594,system_1,mnist,CPU
+deterministic,tensorflow,2.2,0.0468,99.16,651.8542,system_1,mnist,CPU
+deterministic,tensorflow,2.2,0.0468,99.16,638.3501,system_1,mnist,CPU
+random,tensorflow,2.2,0.0549,99.01,252.0463,system_1,mnist,single GPU
+random,tensorflow,2.2,0.0448,99.11,242.3629,system_1,mnist,single GPU
+random,tensorflow,2.2,0.0454,99.19,269.8554,system_1,mnist,single GPU
+random,tensorflow,2.2,0.0484,99.22,239.1473,system_1,mnist,single GPU
+random,tensorflow,2.2,0.0482,99.07,248.6220,system_1,mnist,single GPU
+seeds,tensorflow,2.2,0.0470,99.07,247.0045,system_1,mnist,single GPU
+seeds,tensorflow,2.2,0.0454,99.15,256.5582,system_1,mnist,single GPU
+seeds,tensorflow,2.2,0.0431,99.21,252.2536,system_1,mnist,single GPU
+seeds,tensorflow,2.2,0.0471,99.21,268.4662,system_1,mnist,single GPU
+seeds,tensorflow,2.2,0.0518,99.05,241.6716,system_1,mnist,single GPU
+deterministic,tensorflow,2.2,0.04637,99.02,303.5787,system_1,mnist,single GPU
+deterministic,tensorflow,2.2,0.04637,99.02,286.7710,system_1,mnist,single GPU
+deterministic,tensorflow,2.2,0.04637,99.02,299.1134,system_1,mnist,single GPU
+deterministic,tensorflow,2.2,0.04637,99.02,309.8826,system_1,mnist,single GPU
+deterministic,tensorflow,2.2,0.04637,99.02,313.9591,system_1,mnist,single GPU
+random,tensorflow,2.2,0.0481,99.11,622.5898,system_1,mnist,multi GPU
+random,tensorflow,2.2,0.0503,99.04,611.9239,system_1,mnist,multi GPU
+random,tensorflow,2.2,0.0463,99.02,616.2284,system_1,mnist,multi GPU
+random,tensorflow,2.2,0.0546,99.01,620.7044,system_1,mnist,multi GPU
+random,tensorflow,2.2,0.0493,99.05,634.5911,system_1,mnist,multi GPU
+seeds,tensorflow,2.2,0.0513,99.16,612.7761,system_1,mnist,multi GPU
+seeds,tensorflow,2.2,0.0513,99.16,624.4088,system_1,mnist,multi GPU
+seeds,tensorflow,2.2,0.0513,99.16,632.5841,system_1,mnist,multi GPU
+seeds,tensorflow,2.2,0.0513,99.16,629.4114,system_1,mnist,multi GPU
+seeds,tensorflow,2.2,0.0513,99.16,635.5652,system_1,mnist,multi GPU
+deterministic,tensorflow,2.2,0.0468,99.17,642.2554,system_1,mnist,multi GPU
+deterministic,tensorflow,2.2,0.0468,99.17,629.3151,system_1,mnist,multi GPU
+deterministic,tensorflow,2.2,0.0468,99.17,634.5412,system_1,mnist,multi GPU
+deterministic,tensorflow,2.2,0.0468,99.17,645.1097,system_1,mnist,multi GPU
+deterministic,tensorflow,2.2,0.0468,99.17,664.5485,system_1,mnist,multi GPU
+random,tensorflow,2.2,0.0447,99.15,1088.8331,system_4,mnist,CPU
+random,tensorflow,2.2,0.0388,99.22,984.4759,system_4,mnist,CPU
+random,tensorflow,2.2,0.0432,99.09,1159.1509,system_4,mnist,CPU
+random,tensorflow,2.2,0.0505,98.94,1090.5758,system_4,mnist,CPU
+random,tensorflow,2.2,0.0450,99.02,1072.8921,system_4,mnist,CPU
+seeds,tensorflow,2.2,0.0477,99.05,1155.5794,system_4,mnist,CPU
+seeds,tensorflow,2.2,0.0477,99.05,1115.9794,system_4,mnist,CPU
+seeds,tensorflow,2.2,0.0477,99.05,1198.6164,system_4,mnist,CPU
+seeds,tensorflow,2.2,0.0477,99.05,1089.4865,system_4,mnist,CPU
+seeds,tensorflow,2.2,0.0477,99.05,1152.6412,system_4,mnist,CPU
+deterministic,tensorflow,2.2,0.0436,99.25,1260.0396,system_4,mnist,CPU
+deterministic,tensorflow,2.2,0.0436,99.25,1174.1872,system_4,mnist,CPU
+deterministic,tensorflow,2.2,0.0436,99.25,1125.6845,system_4,mnist,CPU
+deterministic,tensorflow,2.2,0.0436,99.25,1210.5413,system_4,mnist,CPU
+deterministic,tensorflow,2.2,0.0436,99.25,1178.5416,system_4,mnist,CPU
+random,tensorflow,2.2,0.0447,99.32,258.6772,system_4,mnist,single GPU
+random,tensorflow,2.2,0.0501,99.11,260.5085,system_4,mnist,single GPU
+random,tensorflow,2.2,0.0432,99.19,262.6797,system_4,mnist,single GPU
+random,tensorflow,2.2,0.0473,99.04,249.3463,system_4,mnist,single GPU
+random,tensorflow,2.2,0.0317,99.16,261.2842,system_4,mnist,single GPU
+seeds,tensorflow,2.2,0.0362,99.25,257.5395,system_4,mnist,single GPU
+seeds,tensorflow,2.2,0.0413,99.19,259.4793,system_4,mnist,single GPU
+seeds,tensorflow,2.2,0.0427,99.26,260.7239,system_4,mnist,single GPU
+seeds,tensorflow,2.2,0.0396,99.12,264.4348,system_4,mnist,single GPU
+seeds,tensorflow,2.2,0.0545,98.97,256.8139,system_4,mnist,single GPU
+deterministic,tensorflow,2.2,0.0508,99.05,287.6673,system_4,mnist,single GPU
+deterministic,tensorflow,2.2,0.0508,99.05,276.3124,system_4,mnist,single GPU
+deterministic,tensorflow,2.2,0.0508,99.05,246.8461,system_4,mnist,single GPU
+deterministic,tensorflow,2.2,0.0508,99.05,302.4516,system_4,mnist,single GPU
+deterministic,tensorflow,2.2,0.0508,99.05,282.4657,system_4,mnist,single GPU
+System 2 deterministic,tensorflow,2.2,0.0437,99.18,578.9410,system_2,mnist,CPU
+System 2 deterministic,tensorflow,2.2,0.0437,99.18,602.3014,system_2,mnist,CPU
+System 2 deterministic,tensorflow,2.2,0.0437,99.18,540.2110,system_2,mnist,CPU
+System 2 deterministic,tensorflow,2.2,0.0437,99.18,536.9965,system_2,mnist,CPU
+System 2 deterministic,tensorflow,2.2,0.0437,99.18,598.2236,system_2,mnist,CPU
+System 3 deterministic,tensorflow,2.2,0.0437,99.18,602.3964,system_3,mnist,CPU
+System 3 deterministic,tensorflow,2.2,0.0437,99.18,575.1294,system_3,mnist,CPU
+System 3 deterministic,tensorflow,2.2,0.0437,99.18,582.9534,system_3,mnist,CPU
+System 3 deterministic,tensorflow,2.2,0.0437,99.18,603.0090,system_3,mnist,CPU
+System 3 deterministic,tensorflow,2.2,0.0437,99.18,601.9352,system_3,mnist,CPU
+System 2 deterministic,tensorflow,2.2,0.0416,99.15,120.5660,system_2,mnist,single GPU
+System 2 deterministic,tensorflow,2.2,0.0416,99.15,123.2264,system_2,mnist,single GPU
+System 2 deterministic,tensorflow,2.2,0.0416,99.15,119.5924,system_2,mnist,single GPU
+System 2 deterministic,tensorflow,2.2,0.0416,99.15,131.1422,system_2,mnist,single GPU
+System 2 deterministic,tensorflow,2.2,0.0416,99.15,117.2774,system_2,mnist,single GPU
+System 3 deterministic,tensorflow,2.2,0.0416,99.15,126.4124,system_3,mnist,single GPU
+System 3 deterministic,tensorflow,2.2,0.0416,99.15,122.6904,system_3,mnist,single GPU
+System 3 deterministic,tensorflow,2.2,0.0416,99.15,124.3244,system_3,mnist,single GPU
+System 3 deterministic,tensorflow,2.2,0.0416,99.15,118.4245,system_3,mnist,single GPU
+System 3 deterministic,tensorflow,2.2,0.0416,99.15,117.7784,system_3,mnist,single GPU
+System 2 deterministic,tensorflow,2.2,0.0469,99.09,121.4755,system_2,mnist,multi GPU
+System 2 deterministic,tensorflow,2.2,0.0469,99.09,131.0414,system_2,mnist,multi GPU
+System 2 deterministic,tensorflow,2.2,0.0469,99.09,127.3306,system_2,mnist,multi GPU
+System 2 deterministic,tensorflow,2.2,0.0469,99.09,125.5512,system_2,mnist,multi GPU
+System 2 deterministic,tensorflow,2.2,0.0469,99.09,126.0967,system_2,mnist,multi GPU
+System 3 deterministic,tensorflow,2.2,0.0469,99.09,124.8775,system_3,mnist,multi GPU
+System 3 deterministic,tensorflow,2.2,0.0469,99.09,126.9884,system_3,mnist,multi GPU
+System 3 deterministic,tensorflow,2.2,0.0469,99.09,123.5885,system_3,mnist,multi GPU
+System 3 deterministic,tensorflow,2.2,0.0469,99.09,123.8854,system_3,mnist,multi GPU
+System 3 deterministic,tensorflow,2.2,0.0469,99.09,129.0014,system_3,mnist,multi GPU

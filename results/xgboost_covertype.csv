@@ -1,0 +1,256 @@
+setup,framework,version,loss,accuracy,run time [s],system,dataset,processing unit
+random,xgboost,1.0.2,0.0529,NA,470.5423,system_4,covertype,CPU
+random,xgboost,1.0.2,0.0505,NA,472.3258,system_4,covertype,CPU
+random,xgboost,1.0.2,0.0601,NA,428.5361,system_4,covertype,CPU
+random,xgboost,1.0.2,0.0585,NA,450.5974,system_4,covertype,CPU
+random,xgboost,1.0.2,0.0604,NA,485.2499,system_4,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,415.4996,system_4,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,439.5901,system_4,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,449.4591,system_4,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,420.5090,system_4,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,465.2359,system_4,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,429.3491,system_4,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,458.5915,system_4,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,420.4923,system_4,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,440.2830,system_4,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,424.9320,system_4,covertype,CPU
+random,xgboost,1.0.2,0.0599,NA,280.2391,system_4,covertype,single GPU
+random,xgboost,1.0.2,0.0603,NA,295.9414,system_4,covertype,single GPU
+random,xgboost,1.0.2,0.0612,NA,284.5910,system_4,covertype,single GPU
+random,xgboost,1.0.2,0.0558,NA,295.2914,system_4,covertype,single GPU
+random,xgboost,1.0.2,0.0560,NA,294.5913,system_4,covertype,single GPU
+seeds,xgboost,1.0.2,0.0584,NA,283.5915,system_4,covertype,single GPU
+seeds,xgboost,1.0.2,0.0595,NA,281.4815,system_4,covertype,single GPU
+seeds,xgboost,1.0.2,0.0589,NA,275.3250,system_4,covertype,single GPU
+seeds,xgboost,1.0.2,0.0581,NA,275.3291,system_4,covertype,single GPU
+seeds,xgboost,1.0.2,0.0580,NA,276.2193,system_4,covertype,single GPU
+single precision,xgboost,1.0.2,0.0589,NA,276.2193,system_4,covertype,single GPU
+single precision,xgboost,1.0.2,0.0594,NA,259.4921,system_4,covertype,single GPU
+single precision,xgboost,1.0.2,0.0588,NA,257.4814,system_4,covertype,single GPU
+single precision,xgboost,1.0.2,0.0593,NA,259.1852,system_4,covertype,single GPU
+single precision,xgboost,1.0.2,0.0592,NA,266.2941,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0578,NA,413.8195,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0623,NA,409.0194,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0621,NA,405.1292,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0595,NA,442.6094,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0607,NA,492.9401,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,414.9235,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,465.5915,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,459.5942,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,496.2491,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,471.8919,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,410.5182,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,469.4910,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,459.4970,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,470.1589,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,494.2891,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0682,NA,201.1294,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0674,NA,224.1040,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0691,NA,199.2104,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0684,NA,192.9351,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0702,NA,194.2400,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0662,NA,205.1941,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0665,NA,196.2891,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0698,NA,187.1296,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0654,NA,213.4019,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0677,NA,224.1094,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0608,NA,201.0915,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0643,NA,204.1952,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0648,NA,195.1294,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0698,NA,240.4195,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0668,NA,209.9630,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0617,NA,381.3415,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0625,NA,395.1901,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0510,NA,385.1492,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0603,NA,348.5911,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0596,NA,385.8195,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0587,NA,356.1904,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0587,NA,340.2895,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0587,NA,320.9105,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0587,NA,375.8915,system_4,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0587,NA,352.0150,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0587,NA,312.8901,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0587,NA,299.5892,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0587,NA,289.2738,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0587,NA,280.5278,system_4,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0587,NA,289.1248,system_4,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0643,NA,255.8592,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0684,NA,241.5181,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0618,NA,239.4891,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0628,NA,250.8814,system_4,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0668,NA,249.1920,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0673,NA,240.1894,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0673,NA,238.8991,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0673,NA,239.8914,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0673,NA,221.4781,system_4,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0673,NA,257.2398,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0673,NA,243.2758,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0673,NA,255.0198,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0673,NA,233.5981,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0673,NA,241.1851,system_4,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0673,NA,244.9411,system_4,covertype,single GPU
+random,xgboost,1.0.2,0.0593,NA,589.8294,system_1,covertype,CPU
+random,xgboost,1.0.2,0.0574,NA,595.2194,system_1,covertype,CPU
+random,xgboost,1.0.2,0.0603,NA,594.2934,system_1,covertype,CPU
+random,xgboost,1.0.2,0.0624,NA,592.4814,system_1,covertype,CPU
+random,xgboost,1.0.2,0.0588,NA,594.2841,system_1,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,602.4910,system_1,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,605.2194,system_1,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,602.1915,system_1,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,599.1924,system_1,covertype,CPU
+seeds,xgboost,1.0.2,0.0587,NA,597.2148,system_1,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,519.5914,system_1,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,528.2395,system_1,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,593.4105,system_1,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,559.5025,system_1,covertype,CPU
+single precision,xgboost,1.0.2,0.0587,NA,572.4812,system_1,covertype,CPU
+random,xgboost,1.0.2,0.0587,NA,579.4914,system_1,covertype,single GPU
+random,xgboost,1.0.2,0.0588,NA,575.2492,system_1,covertype,single GPU
+random,xgboost,1.0.2,0.0590,NA,581.2844,system_1,covertype,single GPU
+random,xgboost,1.0.2,0.0559,NA,576.9235,system_1,covertype,single GPU
+random,xgboost,1.0.2,0.0584,NA,579.9125,system_1,covertype,single GPU
+seeds,xgboost,1.0.2,0.0588,NA,578.5910,system_1,covertype,single GPU
+seeds,xgboost,1.0.2,0.0595,NA,592.5915,system_1,covertype,single GPU
+seeds,xgboost,1.0.2,0.0596,NA,575.2395,system_1,covertype,single GPU
+seeds,xgboost,1.0.2,0.0589,NA,582.6195,system_1,covertype,single GPU
+seeds,xgboost,1.0.2,0.0588,NA,581.5915,system_1,covertype,single GPU
+single precision,xgboost,1.0.2,0.0592,NA,245.0152,system_1,covertype,single GPU
+single precision,xgboost,1.0.2,0.0598,NA,240.2531,system_1,covertype,single GPU
+single precision,xgboost,1.0.2,0.0594,NA,276.1024,system_1,covertype,single GPU
+single precision,xgboost,1.0.2,0.0595,NA,250.9853,system_1,covertype,single GPU
+single precision,xgboost,1.0.2,0.0589,NA,261.5834,system_1,covertype,single GPU
+random,xgboost,1.0.2,0.0398,NA,853.4291,system_1,covertype,multi GPU
+random,xgboost,1.0.2,0.0396,NA,896.2051,system_1,covertype,multi GPU
+random,xgboost,1.0.2,0.0392,NA,800.4125,system_1,covertype,multi GPU
+random,xgboost,1.0.2,0.0397,NA,765.2394,system_1,covertype,multi GPU
+random,xgboost,1.0.2,0.0385,NA,790.1295,system_1,covertype,multi GPU
+seeds,xgboost,1.0.2,0.0399,NA,860.9824,system_1,covertype,multi GPU
+seeds,xgboost,1.0.2,0.0395,NA,824.0415,system_1,covertype,multi GPU
+seeds,xgboost,1.0.2,0.0392,NA,794.5923,system_1,covertype,multi GPU
+seeds,xgboost,1.0.2,0.0391,NA,824.5104,system_1,covertype,multi GPU
+seeds,xgboost,1.0.2,0.0394,NA,799.9251,system_1,covertype,multi GPU
+single precision,xgboost,1.0.2,0.0392,NA,610.5749,system_1,covertype,multi GPU
+single precision,xgboost,1.0.2,0.0396,NA,593.1772,system_1,covertype,multi GPU
+single precision,xgboost,1.0.2,0.0392,NA,579.3787,system_1,covertype,multi GPU
+single precision,xgboost,1.0.2,0.0391,NA,587.8299,system_1,covertype,multi GPU
+single precision,xgboost,1.0.2,0.0393,NA,592.5195,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 9,0.0590,NA,517.5824,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0624,NA,492.9984,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0612,NA,520.1825,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0599,NA,498.8095,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0575,NA,469.9152,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,494.9852,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,427.4625,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,450.7824,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,471.5892,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 9,0.0586,NA,460.9825,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,424.5874,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,420.5731,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,422.1984,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,458.5810,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 9,0.0586,NA,416.0915,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 9,0.0674,NA,204.0512,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0692,NA,207.1052,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0688,NA,199.1042,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0695,NA,204.8924,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0695,NA,204.9051,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0688,NA,210.5892,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0676,NA,211.8910,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0668,NA,207.4814,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0667,NA,199.8915,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0663,NA,207.1284,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0674,NA,205.1894,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0692,NA,210.2141,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0702,NA,204.6820,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0668,NA,200.8952,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0684,NA,199.5824,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 9,0.0391,NA,512.1284,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 9,0.0393,NA,564.6829,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 9,0.0381,NA,591.8923,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 9,0.0409,NA,584.9825,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 9,0.0374,NA,574.5815,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0388,NA,604.2145,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0390,NA,601.5900,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0393,NA,534.0142,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0384,NA,631.7489,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 9,0.0401,NA,624.9502,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0594,NA,165.4294,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0608,NA,203.5904,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0485,NA,184.9150,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0639,NA,175.2498,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 9,0.0559,NA,189.8923,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 10,0.0601,NA,401.7492,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0622,NA,392.0071,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0605,NA,420.9485,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0599,NA,430.4923,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0552,NA,419.8235,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0586,NA,398.4798,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0586,NA,402.5981,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0586,NA,370.9052,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0586,NA,402.5911,system_1,covertype,CPU
+seeds,xgboost,1.1.0 CUDA 10,0.0586,NA,398.9257,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0586,NA,385.2359,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0586,NA,432.9023,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0586,NA,425.2489,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0586,NA,380.8923,system_1,covertype,CPU
+single precision,xgboost,1.1.0 CUDA 10,0.0586,NA,396.9835,system_1,covertype,CPU
+random,xgboost,1.1.0 CUDA 10,0.0711,NA,199.8943,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0725,NA,195.3895,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0721,NA,204.9052,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0718,NA,210.7843,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0739,NA,199.9842,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0715,NA,210.9525,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0715,NA,205.8965,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0715,NA,195.7823,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0715,NA,195.4367,system_1,covertype,single GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0715,NA,197.7943,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0715,NA,199.0834,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0715,NA,201.0934,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0715,NA,195.6835,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0715,NA,204.4378,system_1,covertype,single GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0715,NA,207.8974,system_1,covertype,single GPU
+random,xgboost,1.1.0 CUDA 10,0.0392,NA,452.9804,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 10,0.0393,NA,494.4789,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 10,0.0385,NA,475.4892,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 10,0.0384,NA,501.5825,system_1,covertype,multi GPU
+random,xgboost,1.1.0 CUDA 10,0.0392,NA,478.4798,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0389,NA,535.5892,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0394,NA,520.8525,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0392,NA,493.2472,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0376,NA,459.5892,system_1,covertype,multi GPU
+seeds,xgboost,1.1.0 CUDA 10,0.0392,NA,528.3298,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0578,NA,150.8923,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0512,NA,176.3923,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0574,NA,145.2798,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0540,NA,158.4975,system_1,covertype,multi GPU
+single precision,xgboost,1.1.0 CUDA 10,0.0551,NA,196.8503,system_1,covertype,multi GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,4.1342,system_2,covertype,CPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,3.9341,system_2,covertype,CPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,4.3924,system_2,covertype,CPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,3.8912,system_2,covertype,CPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,4.0128,system_2,covertype,CPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,3.9184,system_3,covertype,CPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,4.0032,system_3,covertype,CPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,3.8421,system_3,covertype,CPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,4.1102,system_3,covertype,CPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,3.9942,system_3,covertype,CPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.1402,system_2,covertype,single GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.4891,system_2,covertype,single GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.4023,system_2,covertype,single GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.1492,system_2,covertype,single GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.0414,system_2,covertype,single GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.3952,system_3,covertype,single GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.1042,system_3,covertype,single GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.2041,system_3,covertype,single GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.3041,system_3,covertype,single GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0588,99.16,2.1249,system_3,covertype,single GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0504,99.16,2.1402,system_2,covertype,multi GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0523,99.16,2.4891,system_2,covertype,multi GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0475,99.16,2.4023,system_2,covertype,multi GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0532,99.16,2.1492,system_2,covertype,multi GPU
+System 2 seeds,xgboost,1.1.0 CUDA 10,0.0539,99.16,2.0414,system_2,covertype,multi GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0463,99.16,2.3952,system_3,covertype,multi GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0523,99.16,2.1042,system_3,covertype,multi GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0511,99.16,2.2041,system_3,covertype,multi GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0549,99.16,2.3041,system_3,covertype,multi GPU
+System 3 seeds,xgboost,1.1.0 CUDA 10,0.0536,99.16,2.1249,system_3,covertype,multi GPU
