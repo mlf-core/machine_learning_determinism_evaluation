@@ -76,10 +76,16 @@ def test(model, device, test_loader):
 
 @click.command()
 @click.option('--seed', type=int, default=0)
-@click.option('--epochs', type=int, default=10)
+@click.option('--epochs', type=int, default=3)
 @click.option('--no-cuda', type=bool, default=False)
 @click.option('--log-interval', type=int, default=10)
-def start_training(epochs, no_cuda, seed, log_interval):
+@click.option('--mode', type=str, default='det', help='Training mode: rand/det/seed')
+@click.option('--out-path', type=str, default='data')
+def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
+    
+    model_tag = str(random.randint(0, 100))
+    model_ouput_path = os.path.join(out_path, 'output_models', mode)
+
     # Set all random seeds and possibly turn of GPU non determinism
     random_seed(seed, True)
     
@@ -90,14 +96,14 @@ def start_training(epochs, no_cuda, seed, log_interval):
 
     # Load training and testing data
     train_loader = torch.utils.data.DataLoader(
-    datasets.MNIST('data', train=True, download=True,
+    datasets.MNIST(out_path, train=True, download=True,
                 transform=transforms.Compose([
                     transforms.ToTensor(),
                     transforms.Normalize((0.1307,), (0.3081,))
                 ])),
     batch_size=64, shuffle=True, **kwargs)
     test_loader = torch.utils.data.DataLoader(
-    datasets.MNIST('data', train=False, transform=transforms.Compose([
+    datasets.MNIST(out_path, train=False, transform=transforms.Compose([
                     transforms.ToTensor(),
                     transforms.Normalize((0.1307,), (0.3081,))
                 ])),
@@ -121,7 +127,8 @@ def start_training(epochs, no_cuda, seed, log_interval):
         # scheduler.step()
         optimizer.step()
 
-    torch.save(model.state_dict(), 'data/output_models/out_model.pth')
+    torch.save(model.state_dict(), os.path.join(model_ouput_path, model_tag + '_model.pth'))
+    print("saving model to: " + os.path.join(model_ouput_path, model_tag + '_model.pth'))
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
 
