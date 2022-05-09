@@ -121,6 +121,8 @@ def start_training(epochs, no_cuda, seed, log_interval):
         # scheduler.step()
         optimizer.step()
 
+    torch.save(model.state_dict(), 'data/output_models/out_model.pth')
+
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
 
 
