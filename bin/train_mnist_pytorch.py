@@ -54,11 +54,11 @@ def train(log_interval, model, device, train_loader, optimizer, epoch):
         optimizer.step()
 
         loss_list.append(loss.item())
-    
+
     #    if batch_idx % log_interval == 0:
     #        print(f'Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)}'
     #              f'({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}')
-    
+
     loss_list = np.array(loss_list)
     print('Epoch ' + str(epoch) + ' - loss avg: ' + str(np.mean(loss_list)))
 
