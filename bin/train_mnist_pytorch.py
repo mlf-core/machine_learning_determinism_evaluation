@@ -83,7 +83,7 @@ def test(model, device, test_loader):
 @click.option('--out-path', type=str, default='data')
 def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
     
-    model_tag = str(random.randint(0, 100))
+    model_tag = str(random.randint(0, 10000))
     model_ouput_path = os.path.join(out_path, 'output_models', mode)
 
     if(mode == 'rand'):
