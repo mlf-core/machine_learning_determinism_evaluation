@@ -82,6 +82,12 @@ def test(model, device, test_loader):
 @click.option('--mode', type=str, default='det', help='Training mode: rand/seed/det')
 @click.option('--out-path', type=str, default='data')
 def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
+
+    print('seed: ' + seed)
+    print('epochs: ' + epochs)
+    print('mode: ' + mode)
+    print('out-path: ' + out_path)
+    time.sleep(1.0)
     
     model_tag = str(random.randint(0, 10000))
     model_ouput_path = os.path.join(out_path, 'output_models', mode)
@@ -93,6 +99,7 @@ def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
         print("seed mode...")
         set_seed_mode(seed, True)
     else:
+        print("det mode...")
         # Set all random seeds and possibly turn of GPU non-determinism
         set_deterministic_mode(seed, True)
     
