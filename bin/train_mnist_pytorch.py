@@ -79,15 +79,22 @@ def test(model, device, test_loader):
 @click.option('--epochs', type=int, default=3)
 @click.option('--no-cuda', type=bool, default=False)
 @click.option('--log-interval', type=int, default=10)
-@click.option('--mode', type=str, default='det', help='Training mode: rand/det/seed')
+@click.option('--mode', type=str, default='det', help='Training mode: rand/seed/det')
 @click.option('--out-path', type=str, default='data')
 def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
     
     model_tag = str(random.randint(0, 100))
     model_ouput_path = os.path.join(out_path, 'output_models', mode)
 
-    # Set all random seeds and possibly turn of GPU non determinism
-    random_seed(seed, True)
+    if(mode == 'rand'):
+        print("random mode...")
+        set_random_mode()
+    elif(mode == 'seed'):
+        print("seed mode...")
+        set_seed_mode(seed, True)
+    else:
+        # Set all random seeds and possibly turn of GPU non-determinism
+        set_deterministic_mode(seed, True)
     
     # Set GPU settings
     use_cuda = not no_cuda and torch.cuda.is_available()
@@ -133,7 +140,7 @@ def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
 
 
-def random_seed(seed, use_cuda):
+def set_deterministic_mode(seed, use_cuda):
     os.environ['PYTHONHASHSEED'] = str(seed) # Python general
     np.random.seed(seed) 
     random.seed(seed) # Python random
@@ -142,7 +149,19 @@ def random_seed(seed, use_cuda):
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed) # For multiGPU
         torch.backends.cudnn.deterministic = True  
-        torch.backends.cudnn.benchmark = False # Disable 
+        torch.backends.cudnn.benchmark = False # Disable
+
+def set_seed_mode(seed, use_cuda):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed) 
+    random.seed(seed) # Python random
+    torch.manual_seed(seed)
+    if use_cuda: 
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed) # For multiGPU
+
+def set_random_mode():
+    print('nothing to set...')
 
 
 if __name__ == '__main__':
