@@ -83,8 +83,8 @@ def test(model, device, test_loader):
 @click.option('--out-path', type=str, default='data')
 def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
 
-    print('seed: ' + seed)
-    print('epochs: ' + epochs)
+    print('seed: ' + str(seed))
+    print('epochs: ' + str(epochs))
     print('mode: ' + mode)
     print('out-path: ' + out_path)
     time.sleep(1.0)
