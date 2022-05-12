@@ -13,4 +13,4 @@ dependencies:
     - pip
     - pip:
       - torchnet==0.0.4
-
+      - alive-progress==2.4.1

@@ -13,7 +13,7 @@ import time
 import os
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
-
+from alive_progress import alive_bar
 
 class Net(nn.Module):
     def __init__(self):
@@ -41,8 +41,9 @@ class Net(nn.Module):
 
         return output
 
-
 def train(log_interval, model, device, train_loader, optimizer, epoch):
+    train_loss = 0
+    loss_list = []
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
         data, target = data.to(device), target.to(device)
@@ -51,10 +52,13 @@ def train(log_interval, model, device, train_loader, optimizer, epoch):
         loss = F.nll_loss(output, target)
         loss.backward()
         optimizer.step()
-        if batch_idx % log_interval == 0:
-            print(f'Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)}'
-                  f'({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}')
 
+        loss_list.append(loss.item())
+
+    loss_list = np.array(loss_list)
+    train_loss = np.mean(loss_list)
+    
+    return train_loss
 
 def test(model, device, test_loader):
     model.eval()
@@ -70,18 +74,40 @@ def test(model, device, test_loader):
 
     test_loss /= len(test_loader.dataset)
 
-    print(f'\nTest set: Average loss: {test_loss:.4f}, '
-          f'Accuracy: {correct}/{len(test_loader.dataset)} ({100. * correct / len(test_loader.dataset):.0f}%)\n')
+    return test_loss
     
 
 @click.command()
 @click.option('--seed', type=int, default=0)
-@click.option('--epochs', type=int, default=10)
+@click.option('--epochs', type=int, default=3)
 @click.option('--no-cuda', type=bool, default=False)
 @click.option('--log-interval', type=int, default=10)
-def start_training(epochs, no_cuda, seed, log_interval):
-    # Set all random seeds and possibly turn of GPU non determinism
-    random_seed(seed, True)
+@click.option('--mode', type=str, default='det', help='Training mode: rand/seed/det')
+@click.option('--out-path', type=str, default='data')
+def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
+
+    print('==================================')
+    print('==============Training parameters:')
+    print('seed: ' + str(seed))
+    print('epochs: ' + str(epochs))
+    print('mode: ' + mode)
+    print('out-path: ' + out_path)
+    print('==================================')
+    
+    model_tag = str(random.randint(0, 10000))
+    model_ouput_path = os.path.join(out_path, 'output_models', mode)
+
+    if(mode == 'rand'):
+        print("setting RANDOM mode...")
+        # Noting to do, calling dummy function
+        set_random_mode()
+    elif(mode == 'seed'):
+        print("setting SEED mode...")
+        set_seed_mode(seed, True)
+    else:
+        print("setting DETERMINISTIC mode...")
+        # Set all random seeds and possibly turn of GPU non-determinism
+        set_deterministic_mode(seed, True)
     
     # Set GPU settings
     use_cuda = not no_cuda and torch.cuda.is_available()
@@ -90,14 +116,14 @@ def start_training(epochs, no_cuda, seed, log_interval):
 
     # Load training and testing data
     train_loader = torch.utils.data.DataLoader(
-    datasets.MNIST('data', train=True, download=True,
+    datasets.MNIST(out_path, train=True, download=True,
                 transform=transforms.Compose([
                     transforms.ToTensor(),
                     transforms.Normalize((0.1307,), (0.3081,))
                 ])),
     batch_size=64, shuffle=True, **kwargs)
     test_loader = torch.utils.data.DataLoader(
-    datasets.MNIST('data', train=False, transform=transforms.Compose([
+    datasets.MNIST(out_path, train=False, transform=transforms.Compose([
                     transforms.ToTensor(),
                     transforms.Normalize((0.1307,), (0.3081,))
                 ])),
@@ -115,16 +141,23 @@ def start_training(epochs, no_cuda, seed, log_interval):
 
     # Start training
     gpu_runtime = time.time()
-    for epoch in range(1, epochs + 1):
-        train(log_interval, model, device, train_loader, optimizer, epoch)
-        test(model, device, test_loader)
-        # scheduler.step()
-        optimizer.step()
+    with alive_bar(epochs, title=f'Training:') as bar:
+        for epoch in range(1, epochs + 1):
+            train_loss = train(log_interval, model, device, train_loader, optimizer, epoch)
+            test_loss = test(model, device, test_loader)
+            # scheduler.step()
+            optimizer.step()
+
+            bar.text('[Epoch ' + str(epoch) + ']-[train loss: ' + str(train_loss) + ']-[test loss: ' + str(test_loss) + ']')
+            bar()
+
+    torch.save(model.state_dict(), os.path.join(model_ouput_path, model_tag + '_model.pth'))
+    print("saving model to: " + os.path.join(model_ouput_path, model_tag + '_model.pth'))
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
 
 
-def random_seed(seed, use_cuda):
+def set_deterministic_mode(seed, use_cuda):
     os.environ['PYTHONHASHSEED'] = str(seed) # Python general
     np.random.seed(seed) 
     random.seed(seed) # Python random
@@ -133,10 +166,21 @@ def random_seed(seed, use_cuda):
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed) # For multiGPU
         torch.backends.cudnn.deterministic = True  
-        torch.backends.cudnn.benchmark = False # Disable 
+        torch.backends.cudnn.benchmark = False # Disable
+
+def set_seed_mode(seed, use_cuda):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed) 
+    random.seed(seed) # Python random
+    torch.manual_seed(seed)
+    if use_cuda: 
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed) # For multiGPU
+
+def set_random_mode():
+    pass
 
 
 if __name__ == '__main__':
-    print(f'Num GPUs Available: {torch.cuda.device_count()}')
 
     start_training()
