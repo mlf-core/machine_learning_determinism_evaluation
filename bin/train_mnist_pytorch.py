@@ -159,7 +159,8 @@ def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
             # scheduler.step()
             optimizer.step()
 
-            bar.bar.text('train loss: ' + str(train_loss) + ' / test loss: ' + str(test_loss))
+            bar.text('train loss: ' + str(train_loss) + ' / test loss: ' + str(test_loss))
+            bar()
 
     torch.save(model.state_dict(), os.path.join(model_ouput_path, model_tag + '_model.pth'))
     print("saving model to: " + os.path.join(model_ouput_path, model_tag + '_model.pth'))
