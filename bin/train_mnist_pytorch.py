@@ -97,20 +97,21 @@ def test(model, device, test_loader):
 @click.option('--out-path', type=str, default='data')
 def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
 
-    print('==========================')
-    print('=====>Training parameters:')
+    print('==================================')
+    print('==============Training parameters:')
     print('seed: ' + str(seed))
     print('epochs: ' + str(epochs))
     print('mode: ' + mode)
     print('out-path: ' + out_path)
     #time.sleep(1.0)
-    print('==========================')
+    print('==================================')
     
     model_tag = str(random.randint(0, 10000))
     model_ouput_path = os.path.join(out_path, 'output_models', mode)
 
     if(mode == 'rand'):
         print("setting RANDOM mode...")
+        # Noting to do, calling dummy function
         set_random_mode()
     elif(mode == 'seed'):
         print("setting SEED mode...")
@@ -178,7 +179,6 @@ def set_deterministic_mode(seed, use_cuda):
         torch.cuda.manual_seed_all(seed) # For multiGPU
         torch.backends.cudnn.deterministic = True  
         torch.backends.cudnn.benchmark = False # Disable
-    print('...done')
 
 def set_seed_mode(seed, use_cuda):
     os.environ['PYTHONHASHSEED'] = str(seed) # Python general
@@ -188,13 +188,11 @@ def set_seed_mode(seed, use_cuda):
     if use_cuda: 
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed) # For multiGPU
-    print('...done')
 
 def set_random_mode():
-    print('...done')
+    return 0
 
 
 if __name__ == '__main__':
-    print(f'Num GPUs Available: {torch.cuda.device_count()}')
 
     start_training()
