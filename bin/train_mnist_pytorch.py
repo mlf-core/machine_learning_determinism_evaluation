@@ -15,7 +15,6 @@ from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 from alive_progress import alive_bar
 
-
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -42,7 +41,6 @@ class Net(nn.Module):
 
         return output
 
-
 def train(log_interval, model, device, train_loader, optimizer, epoch):
     train_loss = 0
     loss_list = []
@@ -57,16 +55,10 @@ def train(log_interval, model, device, train_loader, optimizer, epoch):
 
         loss_list.append(loss.item())
 
-    #    if batch_idx % log_interval == 0:
-    #        print(f'Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)}'
-    #              f'({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}')
-
     loss_list = np.array(loss_list)
     train_loss = np.mean(loss_list)
-    #print('Epoch ' + str(epoch) + ' - loss avg: ' + str(np.mean(loss_list)))
-
+    
     return train_loss
-
 
 def test(model, device, test_loader):
     model.eval()
@@ -81,9 +73,6 @@ def test(model, device, test_loader):
             correct += pred.eq(target.view_as(pred)).sum().item()
 
     test_loss /= len(test_loader.dataset)
-
-    #print(f'\nTest set: Average loss: {test_loss:.4f}, '
-    #      f'Accuracy: {correct}/{len(test_loader.dataset)} ({100. * correct / len(test_loader.dataset):.0f}%)\n')
 
     return test_loss
     
@@ -103,7 +92,6 @@ def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
     print('epochs: ' + str(epochs))
     print('mode: ' + mode)
     print('out-path: ' + out_path)
-    #time.sleep(1.0)
     print('==================================')
     
     model_tag = str(random.randint(0, 10000))
@@ -190,7 +178,7 @@ def set_seed_mode(seed, use_cuda):
         torch.cuda.manual_seed_all(seed) # For multiGPU
 
 def set_random_mode():
-    return 0
+    pass
 
 
 if __name__ == '__main__':
