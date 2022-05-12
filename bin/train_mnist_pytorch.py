@@ -13,6 +13,7 @@ import time
 import os
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
+from alive_progress import alive_bar
 
 
 class Net(nn.Module):
@@ -43,6 +44,7 @@ class Net(nn.Module):
 
 
 def train(log_interval, model, device, train_loader, optimizer, epoch):
+    train_loss = 0
     loss_list = []
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
@@ -60,7 +62,10 @@ def train(log_interval, model, device, train_loader, optimizer, epoch):
     #              f'({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}')
 
     loss_list = np.array(loss_list)
-    print('Epoch ' + str(epoch) + ' - loss avg: ' + str(np.mean(loss_list)))
+    train_loss = np.mean(loss_list)
+    #print('Epoch ' + str(epoch) + ' - loss avg: ' + str(np.mean(loss_list)))
+
+    return train_loss
 
 
 def test(model, device, test_loader):
@@ -77,8 +82,10 @@ def test(model, device, test_loader):
 
     test_loss /= len(test_loader.dataset)
 
-    print(f'\nTest set: Average loss: {test_loss:.4f}, '
-          f'Accuracy: {correct}/{len(test_loader.dataset)} ({100. * correct / len(test_loader.dataset):.0f}%)\n')
+    #print(f'\nTest set: Average loss: {test_loss:.4f}, '
+    #      f'Accuracy: {correct}/{len(test_loader.dataset)} ({100. * correct / len(test_loader.dataset):.0f}%)\n')
+
+    return test_loss
     
 
 @click.command()
@@ -90,23 +97,26 @@ def test(model, device, test_loader):
 @click.option('--out-path', type=str, default='data')
 def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
 
+    print('==========================')
+    print('=====>Training parameters:')
     print('seed: ' + str(seed))
     print('epochs: ' + str(epochs))
     print('mode: ' + mode)
     print('out-path: ' + out_path)
-    time.sleep(1.0)
+    #time.sleep(1.0)
+    print('==========================')
     
     model_tag = str(random.randint(0, 10000))
     model_ouput_path = os.path.join(out_path, 'output_models', mode)
 
     if(mode == 'rand'):
-        print("random mode...")
+        print("setting RANDOM mode...")
         set_random_mode()
     elif(mode == 'seed'):
-        print("seed mode...")
+        print("setting SEED mode...")
         set_seed_mode(seed, True)
     else:
-        print("det mode...")
+        print("setting DETERMINISTIC mode...")
         # Set all random seeds and possibly turn of GPU non-determinism
         set_deterministic_mode(seed, True)
     
@@ -142,11 +152,14 @@ def start_training(epochs, no_cuda, seed, log_interval, mode, out_path):
 
     # Start training
     gpu_runtime = time.time()
-    for epoch in range(1, epochs + 1):
-        train(log_interval, model, device, train_loader, optimizer, epoch)
-        test(model, device, test_loader)
-        # scheduler.step()
-        optimizer.step()
+    with alive_bar(epochs, title=f'Training:') as bar:
+        for epoch in range(1, epochs + 1):
+            train_loss = train(log_interval, model, device, train_loader, optimizer, epoch)
+            test_loss = test(model, device, test_loader)
+            # scheduler.step()
+            optimizer.step()
+
+            bar('train loss: ' + str(train_loss) + ' / test loss: ' + str(test_loss))
 
     torch.save(model.state_dict(), os.path.join(model_ouput_path, model_tag + '_model.pth'))
     print("saving model to: " + os.path.join(model_ouput_path, model_tag + '_model.pth'))
@@ -164,6 +177,7 @@ def set_deterministic_mode(seed, use_cuda):
         torch.cuda.manual_seed_all(seed) # For multiGPU
         torch.backends.cudnn.deterministic = True  
         torch.backends.cudnn.benchmark = False # Disable
+    print('...done')
 
 def set_seed_mode(seed, use_cuda):
     os.environ['PYTHONHASHSEED'] = str(seed) # Python general
@@ -173,9 +187,10 @@ def set_seed_mode(seed, use_cuda):
     if use_cuda: 
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed) # For multiGPU
+    print('...done')
 
 def set_random_mode():
-    print('nothing to set...')
+    print('...done')
 
 
 if __name__ == '__main__':
