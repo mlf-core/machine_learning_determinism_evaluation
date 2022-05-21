@@ -66,7 +66,18 @@ def start_training(epochs, seed, no_cuda, mode, out_path):
   test_dist_dataset = strategy.experimental_distribute_dataset(test_dataset)
 
   # Fix seeds
-  random_seed(seed)
+  #random_seed(seed)
+  if(mode == 'rand'):
+    print("setting RANDOM mode...")
+    # Noting to do, calling dummy function
+    set_random_mode()
+  elif(mode == 'seed'):
+    print("setting SEED mode...")
+    set_seed_mode(seed)
+  else:
+    print("setting DETERMINISTIC mode...")
+    # Set all random seeds and possibly turn of GPU non-determinism
+    set_deterministic_mode(seed)
 
   # Define Loss and accuracyc metrics
   with strategy.scope():
@@ -150,7 +161,7 @@ def start_training(epochs, seed, no_cuda, mode, out_path):
     model.save(os.path.join(model_ouput_path, 'model_' + model_tag))
 
 
-
+# temporaly left for reference, to be removed before merge
 def random_seed(seed):
     os.environ['PYTHONHASHSEED'] = str(seed) # Python general
     np.random.seed(seed)
@@ -159,6 +170,24 @@ def random_seed(seed):
     tf.config.threading.set_intra_op_parallelism_threads = 1 # CPU only -> https://github.com/NVIDIA/tensorflow-determinism
     tf.config.threading.set_inter_op_parallelism_threads = 1 # CPU only
     os.environ['TF_DETERMINISTIC_OPS'] = '1'
+
+def set_deterministic_mode(seed):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed)
+    random.seed(seed) # Python random
+    tf.random.set_seed(seed)
+    tf.config.threading.set_intra_op_parallelism_threads = 1 # CPU only -> https://github.com/NVIDIA/tensorflow-determinism
+    tf.config.threading.set_inter_op_parallelism_threads = 1 # CPU only
+    os.environ['TF_DETERMINISTIC_OPS'] = '1'
+
+def set_seed_mode(seed):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed)
+    random.seed(seed) # Python random
+    tf.random.set_seed(seed)
+
+def set_random_mode():
+    pass
 
 
 if __name__ == '__main__':
