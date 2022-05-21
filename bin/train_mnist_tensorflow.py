@@ -10,6 +10,8 @@ import click
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
 from tensorflow.keras import Model
 
+from alive_progress import alive_bar
+
 
 def create_model():
     model = tf.keras.Sequential([
@@ -135,26 +137,32 @@ def start_training(epochs, seed, no_cuda, mode, out_path):
       return strategy.run(test_step, args=(dataset_inputs,))
 
     gpu_runtime = time.time()
-    for epoch in range(epochs):
-      # TRAIN LOOP
-      total_loss = 0.0
-      num_batches = 0
-      for dist_dataset in train_dist_dataset:
-        total_loss += distributed_train_step(dist_dataset)
-        num_batches += 1
-      train_loss = total_loss / num_batches
+    
+    with alive_bar(epochs, title=f'Training:') as bar:
+      for epoch in range(epochs):
+        # TRAIN LOOP
+        total_loss = 0.0
+        num_batches = 0
+        for dist_dataset in train_dist_dataset:
+          total_loss += distributed_train_step(dist_dataset)
+          num_batches += 1
+        train_loss = total_loss / num_batches
 
-      # TEST LOOP
-      for dist_dataset in test_dist_dataset:
-        distributed_test_step(dist_dataset)
+        # TEST LOOP
+        for dist_dataset in test_dist_dataset:
+          distributed_test_step(dist_dataset)
 
-      print(f'Epoch {epoch + 1}, Loss: {train_loss}, Accuracy: {train_accuracy.result()},'
-            f'Test Loss: {test_loss.result()}, Test Accuracy: {test_accuracy.result()}')
+        # to be deleted
+        #print(f'Epoch {epoch + 1}, Loss: {train_loss}, Accuracy: {train_accuracy.result()},'
+        #      f'Test Loss: {test_loss.result()}, Test Accuracy: {test_accuracy.result()}')
 
-      # Reset states
-      test_loss.reset_states()
-      train_accuracy.reset_states()
-      test_accuracy.reset_states()
+        bar.text('[Epoch ' + str(epoch + 1) + ']-[train loss: ' + str(train_loss) + ']-[test loss: ' + str(test_loss.result()) + ']')
+        bar()
+
+        # Reset states
+        test_loss.reset_states()
+        train_accuracy.reset_states()
+        test_accuracy.reset_states()
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
     print("saving model to: " + os.path.join(model_ouput_path, 'model_' + model_tag))
