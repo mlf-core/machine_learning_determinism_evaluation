@@ -140,6 +140,8 @@ def start_training(epochs, no_cuda, seed):
       test_accuracy.reset_states()
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
+    model.save('data/output_models_tf/model_01')
+
 
 
 def random_seed(seed):
