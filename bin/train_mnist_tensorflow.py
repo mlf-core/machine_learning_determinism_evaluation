@@ -27,10 +27,16 @@ def create_model():
 
 
 @click.command()
-@click.option('--seed', type=int, default=0)
 @click.option('--epochs', type=int, default=10)
+@click.option('--seed', type=int, default=0)
 @click.option('--no-cuda', type=bool, default=False)
-def start_training(epochs, no_cuda, seed):
+@click.option('--mode', type=str, default='det', help='Training mode: rand/seed/det')
+@click.option('--out-path', type=str, default='data')
+def start_training(epochs, seed, no_cuda, mode, out_path):
+
+  model_tag = str(random.randint(0, 10000))
+  model_ouput_path = os.path.join(out_path, 'output_models_tf', mode)
+
   # Load MNIST
   mnist = tf.keras.datasets.mnist
   (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
@@ -140,7 +146,8 @@ def start_training(epochs, no_cuda, seed):
       test_accuracy.reset_states()
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
-    model.save('data/output_models_tf/model_01')
+    print("saving model to: " + os.path.join(model_ouput_path, 'model_' + model_tag))
+    model.save(os.path.join(model_ouput_path, 'model_' + model_tag))
 
 
 
