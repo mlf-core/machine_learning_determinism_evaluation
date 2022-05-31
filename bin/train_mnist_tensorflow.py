@@ -10,6 +10,8 @@ import click
 from tensorflow.keras.layers import Dense, Flatten, Conv2D
 from tensorflow.keras import Model
 
+from alive_progress import alive_bar
+
 
 def create_model():
     model = tf.keras.Sequential([
@@ -27,10 +29,16 @@ def create_model():
 
 
 @click.command()
-@click.option('--seed', type=int, default=0)
 @click.option('--epochs', type=int, default=10)
+@click.option('--seed', type=int, default=0)
 @click.option('--no-cuda', type=bool, default=False)
-def start_training(epochs, no_cuda, seed):
+@click.option('--mode', type=str, default='det', help='Training mode: rand/seed/det')
+@click.option('--out-path', type=str, default='data')
+def start_training(epochs, seed, no_cuda, mode, out_path):
+
+  model_tag = str(random.randint(0, 10000))
+  model_ouput_path = os.path.join(out_path, 'output_models_tf', mode)
+
   # Load MNIST
   mnist = tf.keras.datasets.mnist
   (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
@@ -60,7 +68,18 @@ def start_training(epochs, no_cuda, seed):
   test_dist_dataset = strategy.experimental_distribute_dataset(test_dataset)
 
   # Fix seeds
-  random_seed(seed)
+  #random_seed(seed)
+  if(mode == 'rand'):
+    print("setting RANDOM mode...")
+    # Noting to do, calling dummy function
+    set_random_mode()
+  elif(mode == 'seed'):
+    print("setting SEED mode...")
+    set_seed_mode(seed)
+  else:
+    print("setting DETERMINISTIC mode...")
+    # Set all random seeds and possibly turn of GPU non-determinism
+    set_deterministic_mode(seed)
 
   # Define Loss and accuracyc metrics
   with strategy.scope():
@@ -118,30 +137,39 @@ def start_training(epochs, no_cuda, seed):
       return strategy.run(test_step, args=(dataset_inputs,))
 
     gpu_runtime = time.time()
-    for epoch in range(epochs):
-      # TRAIN LOOP
-      total_loss = 0.0
-      num_batches = 0
-      for dist_dataset in train_dist_dataset:
-        total_loss += distributed_train_step(dist_dataset)
-        num_batches += 1
-      train_loss = total_loss / num_batches
+    
+    with alive_bar(epochs, title=f'Training:') as bar:
+      for epoch in range(epochs):
+        # TRAIN LOOP
+        total_loss = 0.0
+        num_batches = 0
+        for dist_dataset in train_dist_dataset:
+          total_loss += distributed_train_step(dist_dataset)
+          num_batches += 1
+        train_loss = total_loss / num_batches
 
-      # TEST LOOP
-      for dist_dataset in test_dist_dataset:
-        distributed_test_step(dist_dataset)
+        # TEST LOOP
+        for dist_dataset in test_dist_dataset:
+          distributed_test_step(dist_dataset)
 
-      print(f'Epoch {epoch + 1}, Loss: {train_loss}, Accuracy: {train_accuracy.result()},'
-            f'Test Loss: {test_loss.result()}, Test Accuracy: {test_accuracy.result()}')
+        # to be deleted
+        #print(f'Epoch {epoch + 1}, Loss: {train_loss}, Accuracy: {train_accuracy.result()},'
+        #      f'Test Loss: {test_loss.result()}, Test Accuracy: {test_accuracy.result()}')
 
-      # Reset states
-      test_loss.reset_states()
-      train_accuracy.reset_states()
-      test_accuracy.reset_states()
+        bar.text('[Epoch ' + str(epoch + 1) + ']-[train loss: ' + str(train_loss) + ']-[test loss: ' + str(test_loss.result()) + ']')
+        bar()
+
+        # Reset states
+        test_loss.reset_states()
+        train_accuracy.reset_states()
+        test_accuracy.reset_states()
 
     print(f'GPU Run Time: {str(time.time() - gpu_runtime)} seconds')
+    print("saving model to: " + os.path.join(model_ouput_path, 'model_' + model_tag))
+    model.save(os.path.join(model_ouput_path, 'model_' + model_tag))
 
 
+# temporaly left for reference, to be removed before merge
 def random_seed(seed):
     os.environ['PYTHONHASHSEED'] = str(seed) # Python general
     np.random.seed(seed)
@@ -150,6 +178,24 @@ def random_seed(seed):
     tf.config.threading.set_intra_op_parallelism_threads = 1 # CPU only -> https://github.com/NVIDIA/tensorflow-determinism
     tf.config.threading.set_inter_op_parallelism_threads = 1 # CPU only
     os.environ['TF_DETERMINISTIC_OPS'] = '1'
+
+def set_deterministic_mode(seed):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed)
+    random.seed(seed) # Python random
+    tf.random.set_seed(seed)
+    tf.config.threading.set_intra_op_parallelism_threads = 1 # CPU only -> https://github.com/NVIDIA/tensorflow-determinism
+    tf.config.threading.set_inter_op_parallelism_threads = 1 # CPU only
+    os.environ['TF_DETERMINISTIC_OPS'] = '1'
+
+def set_seed_mode(seed):
+    os.environ['PYTHONHASHSEED'] = str(seed) # Python general
+    np.random.seed(seed)
+    random.seed(seed) # Python random
+    tf.random.set_seed(seed)
+
+def set_random_mode():
+    pass
 
 
 if __name__ == '__main__':
